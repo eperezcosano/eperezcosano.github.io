@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Home]]></title><description><![CDATA[My personal blog of my programming proyects.]]></description><link>https://eperezcosano.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 31 Jul 2020 16:18:47 GMT</lastBuildDate><item><title><![CDATA[Creating the UNO game on JavaScript. (Part I)]]></title><description><![CDATA[In this article I am going to explain step by step everything I came up to create the popular UNO game from scratch just in a simple canvas…]]></description><link>https://eperezcosano.github.io/uno-part1/</link><guid isPermaLink="false">https://eperezcosano.github.io/uno-part1/</guid><pubDate>Fri, 31 Jul 2020 15:52:04 GMT</pubDate><content:encoded>&lt;p&gt;In this article I am going to explain step by step everything I came up to create the popular UNO game from scratch just in a simple canvas for the end-user that is going to play giving them most light client, just the browser. To do so, all code is in JavaScript. On the server side, we manage a Node.JS server to attend all requests performed by users connected through SocketIO.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Home]]></title><description><![CDATA[My personal blog of my programming proyects.]]></description><link>https://eperezcosano.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 10 Aug 2020 08:45:53 GMT</lastBuildDate><item><title><![CDATA[Creating the UNO game on JavaScript. (Part I)]]></title><description><![CDATA[In this article, I am going to explain step by step everything I came up to create the popular UNO game from scratch just in a simple canvas…]]></description><link>https://eperezcosano.github.io/uno-part1/</link><guid isPermaLink="false">https://eperezcosano.github.io/uno-part1/</guid><pubDate>Fri, 31 Jul 2020 15:52:04 GMT</pubDate><content:encoded>&lt;p&gt;In this article, I am going to explain step by step everything I came up to create the popular UNO game from scratch just in a simple canvas for the end-user that is going to play giving them a lightest client, just the browser. To do so, all code is in JavaScript. On the server-side, we manage a Node.JS server to attend all requests performed by users connected through SocketIO.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&quot;setting-up-the-server&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#setting-up-the-server&quot; aria-label=&quot;setting up the server permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Setting up the server&lt;/h2&gt;
 &lt;p&gt;The first goal is to set up a simple HTML webpage that serves out an empty canvas. We are just only going to use two dependencies, &lt;a href=&quot;https://expressjs.com&quot;&gt;Express&lt;/a&gt; as the web framework and &lt;a href=&quot;socket.io&quot;&gt;Socket.IO&lt;/a&gt; as the real-time engine.&lt;/p&gt;
@@ -29,7 +29,7 @@
   &amp;quot;dependencies&amp;quot;: {}
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;This could be a completed &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt; . On my case, I filled up more than the necessary fields like my &lt;a href=&quot;https://github.com/eperezcosano/Uno.git&quot;&gt;GitHub Repo&lt;/a&gt; and others, but it is fine with only a minified version &lt;em&gt;(name, version, description and dependencies)&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;This could be a completed &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;. On my case, I filled up more than the necessary fields like my &lt;a href=&quot;https://github.com/eperezcosano/Uno.git&quot;&gt;GitHub Repo&lt;/a&gt; and others, but it is fine with only a minified version &lt;em&gt;(name, version, description and dependencies)&lt;/em&gt;.&lt;/p&gt;
 &lt;h3 id=&quot;the-web-framework&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#the-web-framework&quot; aria-label=&quot;the web framework permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;The Web Framework&lt;/h3&gt;
 &lt;p&gt;Now, in order to easily populate the &lt;code class=&quot;language-text&quot;&gt;dependencies&lt;/code&gt; property with the things we need, we will use &lt;code class=&quot;language-text&quot;&gt;npm&lt;/code&gt;:&lt;/p&gt;
 &lt;deckgo-highlight-code   terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
@@ -39,7 +39,7 @@
 &lt;deckgo-highlight-code language=&quot;html&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;h1&amp;gt;Hello world&amp;lt;/h1&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;And outside them, in the main directory we define our &lt;code class=&quot;language-text&quot;&gt;server.js&lt;/code&gt; file that will set up our application.&lt;/p&gt;
+&lt;p&gt;And outside them, in the main directory, we define our &lt;code class=&quot;language-text&quot;&gt;server.js&lt;/code&gt; file that will set up our application.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;const express = require(&amp;#39;express&amp;#39;);
 const app = express();
@@ -139,7 +139,7 @@ io.on(&amp;#39;connection&amp;#39;, onConnection);
 http.listen(port, () =&amp;gt; console.log(&amp;#39;listening on port &amp;#39; + port));
 
 function onConnection(socket) {
-	console.log(&amp;#39;a user connected&amp;#39;);
+   console.log(&amp;#39;a user connected&amp;#39;);
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
 &lt;p&gt;Notice that it listen on the &lt;code class=&quot;language-text&quot;&gt;connection&lt;/code&gt; event for incoming sockets and log it to the console.&lt;/p&gt;
@@ -147,10 +147,10 @@ function onConnection(socket) {
 &lt;deckgo-highlight-code language=&quot;html&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;script src=&amp;quot;/socket.io/socket.io.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
 &amp;lt;script&amp;gt;
-	var socket = io();
+   var socket = io();
 &amp;lt;/script&amp;gt;&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;That is all it takes to load the &lt;code class=&quot;language-text&quot;&gt;socket.io&lt;/code&gt; on the client side. Reload the webpage several times and we will get our expected result:
+&lt;p&gt;That is all it takes to load the &lt;code class=&quot;language-text&quot;&gt;socket.io&lt;/code&gt; on the client-side. Reload the webpage several times and we will get our expected result:
 &lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
@@ -185,13 +185,13 @@ function onConnection(socket) {
     &lt;/span&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&quot;project-structure&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#project-structure&quot; aria-label=&quot;project structure permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Project Structure&lt;/h2&gt;
-&lt;p&gt;Now we are ready to start our project, on the client side we will use three files: &lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;style.css&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;main.js&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now we are ready to start our project, on the client-side we will use three files: &lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;style.css&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;main.js&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;In &lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt; we will set these lines in order to create a canvas and use our own styles and JavaScript code:&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;html&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE HTML&amp;gt;
 &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
   &amp;lt;head&amp;gt;
-  	  &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
+     &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;style.css&amp;quot;&amp;gt;
     &amp;lt;link rel=&amp;quot;icon&amp;quot; type=&amp;quot;image/svg&amp;quot; href=&amp;quot;images/uno.svg&amp;quot;&amp;gt;
     &amp;lt;title&amp;gt;Uno&amp;lt;/title&amp;gt;
@@ -216,7 +216,7 @@ canvas {
   display: block;
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;Also we will create a new directory for the UNO deck of cards images
+&lt;p&gt;Also, we will create a new directory for the UNO deck of cards images
 (&lt;code class=&quot;language-text&quot;&gt;/public/images/&lt;/code&gt;)&lt;/p&gt;
 &lt;h3 id=&quot;deck-of-cards&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#deck-of-cards&quot; aria-label=&quot;deck of cards permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Deck of cards&lt;/h3&gt;
 &lt;ul&gt;
@@ -227,14 +227,14 @@ canvas {
 &lt;li&gt;Back side&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/eperezcosano/Uno/master/public/images/uno.svg&quot; alt=&quot;Back&quot;&gt;&lt;/p&gt;
-&lt;p&gt;And within the &lt;code class=&quot;language-text&quot;&gt;main.js&lt;/code&gt; file there is going to be coded all the game on the client side.&lt;/p&gt;
-&lt;p&gt;By last, within the &lt;code class=&quot;language-text&quot;&gt;server.js&lt;/code&gt; file will be coded the rest of the game on the server side.&lt;/p&gt;
+&lt;p&gt;And within the &lt;code class=&quot;language-text&quot;&gt;main.js&lt;/code&gt; file there is going to be coded all the game on the client-side.&lt;/p&gt;
+&lt;p&gt;By last, within the &lt;code class=&quot;language-text&quot;&gt;server.js&lt;/code&gt; file will be coded the rest of the game on the server-side.&lt;/p&gt;
 &lt;h2 id=&quot;loop-through-the-deck-of-cards&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#loop-through-the-deck-of-cards&quot; aria-label=&quot;loop through the deck of cards permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Loop through the deck of cards&lt;/h2&gt;
-&lt;p&gt;Let’s now focus on how we are going to manage the cards display for the client side. Since we only have one image of a full view of all the cards, we want to get one by one each by looping through the image a little chunk that will be the card in question.&lt;/p&gt;
+&lt;p&gt;Let’s now focus on how we are going to manage the cards display for the client-side. Since we only have one image of a full view of all the cards, we want to get one by one each by looping through the image a little chunk that will be the card in question.&lt;/p&gt;
 &lt;p&gt;Look to the &lt;a href=&quot;#deck-of-cards&quot;&gt;deck&lt;/a&gt; structure, we can extract the following patterns:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Each row consist of &lt;strong&gt;14 cards&lt;/strong&gt; of the &lt;em&gt;same color&lt;/em&gt; except for the last one that is a Wild card (either a Wild or a Wild Draw 4).&lt;/li&gt;
-&lt;li&gt;There are &lt;strong&gt;4 colors&lt;/strong&gt; in total and appearing twice, so there are &lt;strong&gt;8 rows&lt;/strong&gt; overall.&lt;/li&gt;
+&lt;li&gt;Each row consist of &lt;strong&gt;14 cards&lt;/strong&gt; of the &lt;em&gt;same colour&lt;/em&gt; except for the last one that is a Wild card (either a Wild or a Wild Draw 4).&lt;/li&gt;
+&lt;li&gt;There are &lt;strong&gt;4 colours&lt;/strong&gt; in total and appearing twice, so there are &lt;strong&gt;8 rows&lt;/strong&gt; overall.&lt;/li&gt;
 &lt;li&gt;The sequence goes from &lt;strong&gt;0 to 9&lt;/strong&gt; card numbers and consequently goes the &lt;strong&gt;Skip,  Reverse, Draw 2&lt;/strong&gt; and &lt;strong&gt;Wild/Wild Draw 4&lt;/strong&gt; cards.&lt;/li&gt;
 &lt;li&gt;The only &lt;strong&gt;two differences&lt;/strong&gt; between the first group of 4 rows and the second is that the first one has the &lt;strong&gt;0 card number&lt;/strong&gt; and &lt;strong&gt;the Wild card&lt;/strong&gt; whereas in the second has the &lt;strong&gt;Wild Draw 4&lt;/strong&gt; instead and &lt;em&gt;4 blank cards&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;Blank cards are not playable so we have to &lt;em&gt;discard them&lt;/em&gt; from the deck and for the following explanations they are not considered.&lt;/li&gt;
@@ -246,7 +246,7 @@ canvas {
 &lt;p&gt;What about finding on what row belongs to? In this case, the formula needed is somehow one that goes from &lt;strong&gt;1 to 8&lt;/strong&gt; and remaining on the same value for each &lt;strong&gt;multiple of 14&lt;/strong&gt;. The solution is just doing a simple division and rounding down the result.&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;⌊ card / 14 ⌋ = row&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Since there are 112 card numbers &lt;em&gt;(blanks are not considered, but the following cards have their position number according to the picture)&lt;/em&gt; this formula provides the &lt;strong&gt;row position&lt;/strong&gt; of any card in the deck.&lt;/p&gt;
-&lt;p&gt;Summarizing everything, we can write the following two functions that will be very useful for us to later handle the cards depending on their color and card type.&lt;/p&gt;
+&lt;p&gt;Summarizing everything, we can write the following two functions that will be very useful for us to later handle the cards depending on their colour and card type.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;/**
  * Given a card number, returns its color
@@ -304,7 +304,7 @@ function cardType(num) {
       return &amp;#39;Number &amp;#39; + (num % 14);
   }
 }&lt;/code&gt;
-        &lt;/deckgo-highlight-code&gt;</content:encoded></item><item><title><![CDATA[How to draw a hexagonal grid on HTML Canvas]]></title><description><![CDATA[In this article we are going to learn how to get a perfect hexagon grid using JavaScript to draw on a HTML canvas. We first need to know a…]]></description><link>https://eperezcosano.github.io/hex-grid/</link><guid isPermaLink="false">https://eperezcosano.github.io/hex-grid/</guid><pubDate>Thu, 23 Jul 2020 14:27:31 GMT</pubDate><content:encoded>&lt;p&gt;In this article we are going to learn how to get a perfect hexagon grid using JavaScript to draw on a HTML canvas. We first need to know a bit of trigonometry to solve this problem as it is necessary for all the calculations for the coordinate points composing a regular polygon.&lt;/p&gt;
+        &lt;/deckgo-highlight-code&gt;</content:encoded></item><item><title><![CDATA[How to draw a hexagonal grid on HTML Canvas]]></title><description><![CDATA[In this article, we are going to learn how to get a perfect hexagon grid using JavaScript to draw on an HTML canvas. We first need to know a…]]></description><link>https://eperezcosano.github.io/hex-grid/</link><guid isPermaLink="false">https://eperezcosano.github.io/hex-grid/</guid><pubDate>Thu, 23 Jul 2020 14:27:31 GMT</pubDate><content:encoded>&lt;p&gt;In this article, we are going to learn how to get a perfect hexagon grid using JavaScript to draw on an HTML canvas. We first need to know a bit of trigonometry to solve this problem as it is necessary for all the calculations for the coordinate points composing a regular polygon.&lt;/p&gt;
 &lt;h2 id=&quot;table-of-contents&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#table-of-contents&quot; aria-label=&quot;table of contents permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Table of Contents&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&quot;#the-basics&quot;&gt;The Basics&lt;/a&gt;&lt;/li&gt;
@@ -317,10 +317,10 @@ function cardType(num) {
 &lt;div style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;/f6c3552346a2bee79f9d4f616143a811/hex.svg&quot; alt=&quot;hexagon&quot; width=&quot;150&quot;&gt;&lt;/div&gt;
 &lt;p&gt;Any regular polygon can be inscribed within a circumference of radius &lt;strong&gt;r&lt;/strong&gt;&lt;/p&gt;
 &lt;div style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;/fb798448f4bb72e11b6f701141e6cf44/circumference.svg&quot; alt=&quot;circumference&quot; width=&quot;250&quot;&gt;&lt;/div&gt;
-&lt;p&gt;So each of its vertexes intersects with the circumference. Drawing from the premise that the center of the circumference is the point of origin &lt;em&gt;(0,0)&lt;/em&gt; we can easily calculate the most-right and most-left vertex are &lt;em&gt;(&lt;strong&gt;r&lt;/strong&gt;, 0)&lt;/em&gt; and &lt;em&gt;(-&lt;strong&gt;r&lt;/strong&gt;,0)&lt;/em&gt; respectively, however, what are the positions of the rest of the points? Here is where trigonometry comes into play.&lt;/p&gt;
+&lt;p&gt;So each of its vertexes intersects with the circumference. Drawing from the premise that the centre of the circumference is the point of origin &lt;em&gt;(0,0)&lt;/em&gt; we can easily calculate the most-right and most-left vertexes are &lt;em&gt;(&lt;strong&gt;r&lt;/strong&gt;, 0)&lt;/em&gt; and &lt;em&gt;(-&lt;strong&gt;r&lt;/strong&gt;,0)&lt;/em&gt; respectively, however, what are the positions of the rest of the points? Here is where trigonometry comes into play.&lt;/p&gt;
 &lt;p&gt;Given any right triangle, the following trigonometric functions applies:&lt;/p&gt;
 &lt;div style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;/e1a78d00b463587772f7a422cd9cc181/trigo.svg&quot; alt=&quot;trigonometry&quot; width=&quot;250&quot;&gt;&lt;/div&gt;
-&lt;p&gt;It is very useful to know any side of the triangle if you know one of its other sides and the angle it forms. For this case, the angle formed by each vertex with the horizontal axis is equal by dividing the circumference by the number of sides (360º / 6 = &lt;strong&gt;60º&lt;/strong&gt;) and we also know that the hypotenuse is equal to the radius of the circumference &lt;strong&gt;r&lt;/strong&gt;. From the first equation we can say that a = c &lt;em&gt; sinα and b = c &lt;/em&gt;cosα. In summary, putting altogether the second vertex coordinates are &lt;em&gt;(&lt;strong&gt;rcos60º&lt;/strong&gt;,&lt;strong&gt;rsin60º&lt;/strong&gt;)&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;It is very useful to know any side of the triangle if you know one of its other sides and the angle it forms. For this case, the angle formed by each vertex with the horizontal axis is equal by dividing the circumference by the number of sides (360º / 6 = &lt;strong&gt;60º&lt;/strong&gt;) and we also know that the hypotenuse is equal to the radius of the circumference &lt;strong&gt;r&lt;/strong&gt;. From the first equation we can say that a = c &lt;em&gt; sinα and b = c &lt;/em&gt;cosα. In summary, putting all together the second vertex coordinates are &lt;em&gt;(&lt;strong&gt;rcos60º&lt;/strong&gt;,&lt;strong&gt;rsin60º&lt;/strong&gt;)&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/e54179cfce3b7e01ada66b0ee7d3beb4/trigo2.svg&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Then the rest comes as a multiple of 60º as 120º, 180º, 240º, 300º and 360º which is equal to 0º again. Notice that the most-right and most-left vertex coincide with what we have expected due to sin0º = 0, cos0º = 1, cos180º = -1 and sin0º = 0. These are the resulting vertexes:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/8124cf09214dbaf0e8a7b3bacaab141b/trigo3.svg&quot;&gt;&lt;/p&gt;
@@ -330,8 +330,8 @@ function cardType(num) {
           &lt;code slot=&quot;code&quot;&gt;&amp;lt;!DOCTYPE HTML&amp;gt;
 &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
   &amp;lt;head&amp;gt;
-  	&amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
-  	&amp;lt;title&amp;gt;HexGrid&amp;lt;/title&amp;gt;
+   &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
+   &amp;lt;title&amp;gt;HexGrid&amp;lt;/title&amp;gt;
   &amp;lt;/head&amp;gt;
   &amp;lt;body&amp;gt;
     &amp;lt;canvas id=&amp;quot;canvas&amp;quot; width=&amp;quot;800&amp;quot; height=&amp;quot;500&amp;quot;/&amp;gt;
@@ -347,7 +347,7 @@ const ctx = canvas.getContext(&amp;#39;2d&amp;#39;);
 function init() {}
 init();&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;As far as we know, we are going to set up the angle and the size of the hexagon as constants. Notice the angles are needed to be expressed in radians (360º = 2π rad)&lt;/p&gt;
+&lt;p&gt;As far as we know, we are going to set up the angle and the size of the hexagon as constants. Notice the angles are needed to be expressed in radians (360º = 2π  rad)&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;const a = 2 * Math.PI / 6;
 const r = 50;&lt;/code&gt;
@@ -373,7 +373,7 @@ const r = 50;&lt;/code&gt;
 &lt;h2 id=&quot;a-row&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#a-row&quot; aria-label=&quot;a row permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;A Row&lt;/h2&gt;
 &lt;p&gt;Perfect! The next step is to draw a row of hexagons, like that:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/7edc8cca90ccd1442481751622ce7a78/row.svg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Essentially it is important to know where the next center is going to be located to fit perfectly with one another. First, notice how much horizontally is placed the purple arrow. It is a distance of the radius &lt;strong&gt;r&lt;/strong&gt; plus a segment we already know as &lt;strong&gt;rcos60º&lt;/strong&gt;. And same as vertically, a segment of &lt;strong&gt;rsin60º&lt;/strong&gt; downwards. The procedure is always adding the same amount horizontally and alternating vertically.&lt;/p&gt;
+&lt;p&gt;Essentially it is important to know where the next centre is going to be located to fit perfectly with one another. First, notice how much horizontally is placed the purple arrow. It is a distance of the radius &lt;strong&gt;r&lt;/strong&gt; plus a segment we already know as &lt;strong&gt;rcos60º&lt;/strong&gt;. And same as vertically, a segment of &lt;strong&gt;rsin60º&lt;/strong&gt; downwards. The procedure is always adding the same amount horizontally and alternating vertically.&lt;/p&gt;
 &lt;p&gt;The code that allows to draw the four hexagons showed before is:&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;// 1st
@@ -401,7 +401,7 @@ drawHexagon(x, y);&lt;/code&gt;
   See the Pen &lt;a href=&apos;https://codepen.io/eperezcosano/pen/xxZBEwN&apos;&gt;Raw Row&lt;/a&gt; by Ethan
   (&lt;a href=&apos;https://codepen.io/eperezcosano&apos;&gt;@eperezcosano&lt;/a&gt;) on &lt;a href=&apos;https://codepen.io&apos;&gt;CodePen&lt;/a&gt;.
 &lt;/iframe&gt;
-&lt;p&gt;We need to find the pattern that will allow to made this scalable.
+&lt;p&gt;We need to find the pattern that will allow making this scalable.
 On the one hand, &lt;em&gt;x&lt;/em&gt; could be written as a increment of:&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;x = x + r + r * Math.cos(a);&lt;/code&gt;
@@ -448,7 +448,7 @@ y = y + (-1) ** j * r * Math.sin(a);&lt;/code&gt;
 &lt;h2 id=&quot;the-grid&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#the-grid&quot; aria-label=&quot;the grid permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;The Grid&lt;/h2&gt;
 &lt;p&gt;That is it! We are just one step away from success. All we need is to repeat the same procedure but in the row below repeatedly. But, how much lower is it from the original row? Let’s find it out:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/c92173d5dbbc6b8061598818d253339e/column.svg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;This would be the final scheme of our grid, showing the first four centers of each row to get a good view on what is going on. From the center &lt;em&gt;(0,0)&lt;/em&gt; we can see that the blue arrow takes a distance of twice the length of the hexagon height that sums up to &lt;strong&gt;2rsin60º&lt;/strong&gt;. The rest is going to be the same taking into account this offset. We modify our function to draw many lines as the last hexagon fits in the canvas height.&lt;/p&gt;
+&lt;p&gt;This would be the final scheme of our grid, showing the first four centres of each row to get a good view on what is going on. From the centre &lt;em&gt;(0,0)&lt;/em&gt; we can see that the blue arrow takes a distance of twice the length of the hexagon height that sums up to &lt;strong&gt;2rsin60º&lt;/strong&gt;. The rest is going to be the same taking into account this offset. We modify our function to draw many lines as the last hexagon fits in the canvas height.&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;function drawGrid(width, height) {
   for (let y = r; y + r * Math.sin(a) &amp;lt; height; y += r * Math.sin(a)) {
@@ -458,7 +458,7 @@ y = y + (-1) ** j * r * Math.sin(a);&lt;/code&gt;
   }
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;Let’s put altogether and try it out!&lt;/p&gt;
+&lt;p&gt;Let’s put all together and try it out!&lt;/p&gt;
 &lt;h3 id=&quot;result-3&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#result-3&quot; aria-label=&quot;result 3 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Result&lt;/h3&gt;
 &lt;iframe height=&quot;628&quot; style=&quot;width: 100%;&quot; scrolling=&quot;no&quot; title=&quot;A Grid&quot; src=&quot;https://codepen.io/eperezcosano/embed/vYLPXYO?height=628&amp;theme-id=light&amp;default-tab=result&quot; frameborder=&quot;no&quot; allowtransparency=&quot;true&quot; allowfullscreen=&quot;true&quot;&gt;
   See the Pen &lt;a href=&apos;https://codepen.io/eperezcosano/pen/vYLPXYO&apos;&gt;A Grid&lt;/a&gt; by Ethan
