@@ -72,6 +72,7 @@
 <li><a href="#a-row">A Row</a></li>
 <li><a href="#the-grid">The Grid</a></li>
 </ol>
+<hr>
 <h2 id="the-basics" style="position:relative;"><a href="#the-basics" aria-label="the basics permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Basics</h2>
 <p>First of all, we introduce a regular hexagon that is composed of six equal sides.</p>
 <div style="text-align:center"><img src="/f6c3552346a2bee79f9d4f616143a811/hex.svg" alt="hexagon" width="150"></div>
@@ -123,7 +124,7 @@ const r = 50;</code>
   ctx.stroke();
 }</code>
         </deckgo-highlight-code>
-<p>Before testing it, notice that the point <em>(0,0)</em> in our canvas starts on the upper left corner, so in order to fit the drawing we need a minimum offset of <strong>r</strong>.
+<p>Before testing it, notice that the point <em>(0,0)</em> in our canvas starts on the upper left corner, so to fit the drawing we need a minimum offset of <strong>r</strong>.
 <img src="/e43e70506381d06f0d758f5d1ed8fd03/borders.svg"></p>
 <h3 id="result" style="position:relative;"><a href="#result" aria-label="result permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Result</h3>
 <iframe height="265" style="width: 100%;" scrolling="no" title="An Hex" src="https://codepen.io/eperezcosano/embed/eYJXzXK?height=265&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
@@ -181,7 +182,7 @@ Let’s assign a new variable <em>j</em> that increases just as it does the posi
           <code slot="code">(-1) ** j = -1 when j is odd
 (-1) ** j = 1 when j is even</code>
         </deckgo-highlight-code>
-<p>That is exactly what we were looking for! Let’s wrap in altogether, and <em>y</em> is expressed for every iteration as:</p>
+<p>That is exactly what we were looking for! Let’s wrap it all together, and <em>y</em> is expressed for every iteration as:</p>
 <deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
           <code slot="code">j++;
 y = y + (-1) ** j * r * Math.sin(a);</code>
