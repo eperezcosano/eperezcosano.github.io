@@ -1,0 +1,687 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.75 'Merriweather','Georgia',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:hsla(0,0%,0%,0.9);font-family:'Merriweather','Georgia',serif;font-weight:400;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:Montserrat,sans-serif;font-weight:900;text-rendering:optimizeLegibility;font-size:2.5rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.73286rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.4427rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;letter-spacing:0.140625em;text-transform:uppercase;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.83255rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.75966rem;line-height:1.1;font-style:italic;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}ul{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;list-style:disc;}ol{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:0.85rem;line-height:1.75rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1rem;line-height:1.75rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}blockquote{margin-left:-1.75rem;margin-right:1.75rem;margin-top:0;padding-bottom:0;padding-left:1.42188rem;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1.20112rem;line-height:1.75rem;color:hsla(0,0%,0%,0.59);font-style:italic;border-left:0.32813rem solid hsla(0,0%,0%,0.9);}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.75rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}b{font-weight:700;}strong{font-weight:700;}dt{font-weight:700;}th{font-weight:700;}li{margin-bottom:calc(1.75rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}li > ul{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.75rem / 2);}code{font-size:0.85rem;line-height:1.75rem;}kbd{font-size:0.85rem;line-height:1.75rem;}samp{font-size:0.85rem;line-height:1.75rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.16667rem;padding-right:1.16667rem;padding-top:0.875rem;padding-bottom:calc(0.875rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}blockquote > :last-child{margin-bottom:0;}blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}ul,ol{margin-left:0;}@media only screen and (max-width:480px){ul,ol{margin-left:1.75rem;}blockquote{margin-left:-1.3125rem;margin-right:0;padding-left:0.98438rem;}}h1,h2,h3,h4,h5,h6{margin-top:3.5rem;}a{box-shadow:0 1px 0 0 currentColor;color:#007acc;text-decoration:none;}a:hover,a:active{box-shadow:none;}mark,ins{background:#007acc;color:white;padding:0.10938rem 0.21875rem;text-decoration:none;}a.gatsby-resp-image-link{box-shadow:none;}</style><style data-href="/styles.ed5da8f34e5d3495f6eb.css">.anchor{box-shadow:none}.logoLink img{margin-bottom:0}article section h2,article section h3{margin-top:0;margin-bottom:20px}article section deckgo-highlight-code{margin-bottom:30px}.task-list-item{list-style:none}article section ol li,article section ol li>p,article section ol ul,article section ol ul li{margin-top:0;margin-bottom:0}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:100;src:local("Montserrat Thin "),local("Montserrat-Thin"),url(/static/montserrat-latin-100-191cc9f50f3b76b9617cb383f19acb7d.woff2) format("woff2"),url(/static/montserrat-latin-100-370318464551d5f25b0f0a78f374faac.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:100;src:local("Montserrat Thin italic"),local("Montserrat-Thinitalic"),url(/static/montserrat-latin-100italic-bdeaeb79db315697bd173a55b097dc18.woff2) format("woff2"),url(/static/montserrat-latin-100italic-ecf7d49386e8f265878e735db34a7c4b.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:200;src:local("Montserrat Extra Light "),local("Montserrat-Extra Light"),url(/static/montserrat-latin-200-85d5ef9db7f2dc6979172a4a3b2c57cb.woff2) format("woff2"),url(/static/montserrat-latin-200-1fc98e126a3d152549240e6244d7e669.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:200;src:local("Montserrat Extra Light italic"),local("Montserrat-Extra Lightitalic"),url(/static/montserrat-latin-200italic-49095760a498d024fe1a85a078850df9.woff2) format("woff2"),url(/static/montserrat-latin-200italic-fe46cf8b9462c820457d3bf537e4057f.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:300;src:local("Montserrat Light "),local("Montserrat-Light"),url(/static/montserrat-latin-300-7c3daf12b706645b5d3710f863a4da04.woff2) format("woff2"),url(/static/montserrat-latin-300-8dc95fab9cf98d02ca8d76e97d3dff60.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:300;src:local("Montserrat Light italic"),local("Montserrat-Lightitalic"),url(/static/montserrat-latin-300italic-f20b178ca2024a5eac8e42e6649db86c.woff2) format("woff2"),url(/static/montserrat-latin-300italic-3fe16939288856e8e828fa2661bf2354.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:400;src:local("Montserrat Regular "),local("Montserrat-Regular"),url(/static/montserrat-latin-400-bc3aa95dca08f5fee5291e34959c27bc.woff2) format("woff2"),url(/static/montserrat-latin-400-8102c4838f9e3d08dad644290a9cb701.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:400;src:local("Montserrat Regular italic"),local("Montserrat-Regularitalic"),url(/static/montserrat-latin-400italic-5cad650422a7184467af5a4d17b264c4.woff2) format("woff2"),url(/static/montserrat-latin-400italic-d191f22af3bb50902b99ac577f81a322.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500;src:local("Montserrat Medium "),local("Montserrat-Medium"),url(/static/montserrat-latin-500-92d16e458625f4d2c8940f6bdca0ff09.woff2) format("woff2"),url(/static/montserrat-latin-500-8b763220218ffc11c57c84ddb80e7b26.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:500;src:local("Montserrat Medium italic"),local("Montserrat-Mediumitalic"),url(/static/montserrat-latin-500italic-47bfcca6b69d6a9acca7a8bff17193e2.woff2) format("woff2"),url(/static/montserrat-latin-500italic-72c01f753c3940c0b9cb6bf2389caddf.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600;src:local("Montserrat SemiBold "),local("Montserrat-SemiBold"),url(/static/montserrat-latin-600-6fb1b5623e528e27c18658fecf5ee0ee.woff2) format("woff2"),url(/static/montserrat-latin-600-7c839d15a6f54e7025ba8c0c4b333e8f.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:600;src:local("Montserrat SemiBold italic"),local("Montserrat-SemiBolditalic"),url(/static/montserrat-latin-600italic-60789af1c9338ed1a9546722ec54b4f7.woff2) format("woff2"),url(/static/montserrat-latin-600italic-f3d4de8d0afb19e777c79032ce828e3d.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:700;src:local("Montserrat Bold "),local("Montserrat-Bold"),url(/static/montserrat-latin-700-39d93cf678c740f9f6b2b1cfde34bee3.woff2) format("woff2"),url(/static/montserrat-latin-700-80f10bd382f0df1cd650fec59f3c9394.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:700;src:local("Montserrat Bold italic"),local("Montserrat-Bolditalic"),url(/static/montserrat-latin-700italic-ba136d97b14e82284dd595e257f11c47.woff2) format("woff2"),url(/static/montserrat-latin-700italic-8c98142b425630821139c24bd1698700.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold "),local("Montserrat-ExtraBold"),url(/static/montserrat-latin-800-b7018be9ed6cd94da8b6675b3a468c3b.woff2) format("woff2"),url(/static/montserrat-latin-800-9a9befcf50d64f9d2d19d8b1d1984add.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold italic"),local("Montserrat-ExtraBolditalic"),url(/static/montserrat-latin-800italic-540ffdd223d1a9ad3d4e678e1a23372e.woff2) format("woff2"),url(/static/montserrat-latin-800italic-897086f99f4e1f45e6b1e9368527d0bc.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:900;src:local("Montserrat Black "),local("Montserrat-Black"),url(/static/montserrat-latin-900-58cd789700850375b834e8b6776002eb.woff2) format("woff2"),url(/static/montserrat-latin-900-26d42c9428780e545a540bbb50c84bce.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:900;src:local("Montserrat Black italic"),local("Montserrat-Blackitalic"),url(/static/montserrat-latin-900italic-451157bc8861fe54f523b3669a3def71.woff2) format("woff2"),url(/static/montserrat-latin-900italic-a8ec4957e1c24f5793305763ad9845b3.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:300;src:local("Merriweather Light "),local("Merriweather-Light"),url(/static/merriweather-latin-300-b1158cfcd4aacb9d8fb61625e37af46a.woff2) format("woff2"),url(/static/merriweather-latin-300-cc7de05e166e90320d7d896e0f72a19d.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:300;src:local("Merriweather Light italic"),local("Merriweather-Lightitalic"),url(/static/merriweather-latin-300italic-8fe52a48089d6ebe46db0b8e7cc66263.woff2) format("woff2"),url(/static/merriweather-latin-300italic-e1331f5397c2a673f9d3765138debdb5.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:400;src:local("Merriweather Regular "),local("Merriweather-Regular"),url(/static/merriweather-latin-400-8276fdb72ae8f4714d4e6eba704cc39f.woff2) format("woff2"),url(/static/merriweather-latin-400-69f09800f4f6479d06e44eba837df872.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:400;src:local("Merriweather Regular italic"),local("Merriweather-Regularitalic"),url(/static/merriweather-latin-400italic-3a9be9ea9f7aa4af6de7307df21d9fc0.woff2) format("woff2"),url(/static/merriweather-latin-400italic-d76079ed7541a433a54f79316de086e9.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:700;src:local("Merriweather Bold "),local("Merriweather-Bold"),url(/static/merriweather-latin-700-fa534be7ffa380e39a7f6e03bf9a5e03.woff2) format("woff2"),url(/static/merriweather-latin-700-ba56ea84b8084b7ff9677f50d3cd81bd.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:700;src:local("Merriweather Bold italic"),local("Merriweather-Bolditalic"),url(/static/merriweather-latin-700italic-1ef5edaaa20ae53ea50399884c5e48c6.woff2) format("woff2"),url(/static/merriweather-latin-700italic-534bc9e7ce93c73d73426e46acd78092.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:900;src:local("Merriweather Black "),local("Merriweather-Black"),url(/static/merriweather-latin-900-7528fb70e8a4a82c7305e72ff43ac25f.woff2) format("woff2"),url(/static/merriweather-latin-900-3799b6e2f5ed3fcccf9d7a708d7419fa.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:900;src:local("Merriweather Black italic"),local("Merriweather-Blackitalic"),url(/static/merriweather-latin-900italic-e1b4d2aaa78e12ad84aaf8a56321e4c2.woff2) format("woff2"),url(/static/merriweather-latin-900italic-2ae22f731b3424e8dbb4b37f7ca6e708.woff) format("woff")}code[class*=language-],pre[class*=language-]{color:#000;background:none;text-shadow:0 1px #fff;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-]::selection,code[class*=language-] ::selection,pre[class*=language-]::selection,pre[class*=language-] ::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}</style><meta name="generator" content="Gatsby 2.23.12"/><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-49785407-2', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><link rel="icon" href="/favicon-32x32.png?v=acd7449296158d5839eac36d0d46b01b"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#663399"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=acd7449296158d5839eac36d0d46b01b"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=acd7449296158d5839eac36d0d46b01b"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=acd7449296158d5839eac36d0d46b01b"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=acd7449296158d5839eac36d0d46b01b"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=acd7449296158d5839eac36d0d46b01b"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=acd7449296158d5839eac36d0d46b01b"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=acd7449296158d5839eac36d0d46b01b"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=acd7449296158d5839eac36d0d46b01b"/><title data-react-helmet="true">Creating the UNO game on JavaScript. (Part II) | Home</title><meta data-react-helmet="true" name="description" content="Second part for the UNO game project."/><meta data-react-helmet="true" property="og:title" content="Creating the UNO game on JavaScript. (Part II)"/><meta data-react-helmet="true" property="og:description" content="Second part for the UNO game project."/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="https://www.linkedin.com/in/izan-pérez-cosano-58033218a/"/><meta data-react-helmet="true" name="twitter:title" content="Creating the UNO game on JavaScript. (Part II)"/><meta data-react-helmet="true" name="twitter:description" content="Second part for the UNO game project."/><link as="script" rel="preload" href="/webpack-runtime-75ee461a077d7dcfd9bc.js"/><link as="script" rel="preload" href="/framework-5fc6169171e885c3b522.js"/><link as="script" rel="preload" href="/styles-24c541b6ac347bae38f1.js"/><link as="script" rel="preload" href="/app-410ebca7345378f68a64.js"/><link as="script" rel="preload" href="/commons-9c2372e0327e826158ff.js"/><link as="script" rel="preload" href="/cd7d5f864fc9e15ed8adef086269b0aeff617554-63c84ed6e391f9619bf3.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-f238a360ee530ace5f5c.js"/><link as="fetch" rel="preload" href="/page-data/uno-part2/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div style="margin-left:auto;margin-right:auto;max-width:42rem;padding:2.625rem 1.3125rem"><header><a class="logoLink" style="box-shadow:none;color:inherit" href="/"><img src="/static/logo-bf6f0fe8c7a8b33ec30cbc15f450541b.svg" alt="logo" width="100px"/></a></header><main><article><header><h1 style="margin-top:0;margin-bottom:0;font-weight:750">Creating the UNO game on JavaScript. (Part II)</h1><p style="font-size:0.83255rem;line-height:1.75rem;display:block;margin-bottom:1.75rem">September 18, 2020</p></header><section><p>Here there is a continuation of the <a href="https://eperezcosano.github.io/uno-part1/">last article</a> explaining how to start a  project to achieve a basic client-server side installation and a few concepts to how to loop through the deck of cards by associating numbers to each card. In this part, let’s start by creating the protocol will follow the client to connect to the server such as the messages and parameters exchanges.</p>
+<hr>
+<h2 id="contents" style="position:relative;"><a href="#contents" aria-label="contents permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Contents</h2>
+<ol>
+<li>
+<p><a href="#server-side-preparations">Server-side preparations</a></p>
+<ul>
+<li><a href="#recap">Recap</a></li>
+<li><a href="#rooms-and-players">Rooms and players</a></li>
+<li><a href="#the-deck-of-cards">The deck of cards</a></li>
+<li><a href="#game-data">Game Data</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#client-side-preparations">Client-side preparations</a></p>
+<ul>
+<li><a href="#connection">Connection</a></li>
+<li><a href="#player-name-and-cookies">Player name and Cookies</a></li>
+<li><a href="#canvas-initialitation">Canvas initialitation</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#connection-protocol">Connection protocol</a></p>
+<ul>
+<li><a href="#room-request">Room request</a></li>
+<li><a href="#room-response">Room Response</a></li>
+</ul>
+</li>
+<li><a href="#starting-a-new-game">Starting a new game</a></li>
+<li><a href="#handling-players-disconnection">Handling players disconnection</a></li>
+<li>
+<p><a href="#drawing-or-playing-a-card">Drawing or playing a card</a></p>
+<ul>
+<li><a href="#coordinate-system">Coordinate system</a></li>
+<li><a href="#drawing-a-card">Drawing a card</a></li>
+<li><a href="#playing-a-card">Playing a card</a></li>
+<li><a href="#printing-the-results">Printing the results</a></li>
+</ul>
+</li>
+<li><a href="#to-do-list">To-Do List</a></li>
+</ol>
+<hr>
+<h2 id="server-side-preparations" style="position:relative;"><a href="#server-side-preparations" aria-label="server side preparations permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Server-side preparations</h2>
+<h3 id="recap" style="position:relative;"><a href="#recap" aria-label="recap permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Recap</h3>
+<p>In summary, as seen before, the server starts by performing this first lines of code:</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">const express = require(&#39;express&#39;);
+const app = express();
+const http = require(&#39;http&#39;).Server(app);
+const io = require(&#39;socket.io&#39;)(http);
+const port = process.env.PORT || 3000;
+
+app.use(express.static(__dirname + &#39;/public&#39;));
+io.on(&#39;connection&#39;, onConnection);
+http.listen(port, () =&gt; console.log(&#39;listening on port &#39; + port));</code>
+        </deckgo-highlight-code>
+<h3 id="rooms-and-players" style="position:relative;"><a href="#rooms-and-players" aria-label="rooms and players permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rooms and players</h3>
+<p>The way I think the game could be playable by several groups of people is to define <em>Rooms</em>.  The idea is that within each room will be running a UNO game and will be isolated by the other rooms, so different groups of players can join. </p>
+<p>At this point, we have to write the game rules in our code, I have chosen the <a href="https://service.mattel.com/instruction_sheets/42001pr.pdf">official UNO rules from this sheet</a>.</p>
+<p>We can be starting by creating a couple of constants indicating the maximum of rooms the server could handle and how many people can be within each room.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">const numRooms = 5;
+const maxPeople = 10;</code>
+        </deckgo-highlight-code>
+<h3 id="the-deck-of-cards" style="position:relative;"><a href="#the-deck-of-cards" aria-label="the deck of cards permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The deck of cards</h3>
+<p>Let’s continue by defining the deck of cards, as seen before, each card will be represented by consecutive numbers up to 112. So a simple array storing these numbers will be the representation of the actual deck of cards.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">let deck = Array.apply(null, Array(112)).map(function (_, i) {return i;});</code>
+        </deckgo-highlight-code>
+<p>However, keep in mind that there are 112 is because there are blank cards, but since we need to discard them to play, we use the <em>slice</em> function in order remove the element from the array. Notice that the cards following a blank card will stay the same, as we want the <em>actual position in the deck scheme image</em>, so, for example, the first blank card is in the 56th position and by discarding it, its neighbours stay at 55 and 57. The following code is performed for the four blank cards.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">deck.splice(56, 1); //56
+deck.splice(69, 1); //70
+deck.splice(82, 1); //84
+deck.splice(95, 1); //98</code>
+        </deckgo-highlight-code>
+<p>Last but not least, is to define a `shuffle function that will be pretty handy to deliver a shuffled deck to every room.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">/**
+ * Shuffles all elements in array
+ * @function
+ * @param {Array} to shuffle
+ */
+function shuffle(a) {
+  let j, x, i;
+  for (i = a.length - 1; i &gt; 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+}</code>
+        </deckgo-highlight-code>
+<h3 id="game-data" style="position:relative;"><a href="#game-data" aria-label="game data permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Game data</h3>
+<p><em>How will the server remember whose turn is it or what card is the table to calculate a legal play?</em> The easiest solution is by creating an array on the flight right before starting any game which will store vary useful information for the progression of the game, such as, the actual remaining deck, the reverse orientation turn, card on board, and the information of the players: names, cards on hand, etcetera. Further details will be explained as we continue.  So this code will create an array on which room is stored as <code class="language-text">data[Room_N]</code> being <code class="language-text">N</code> the current number room.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">let data = [];
+for (let i = 1; i &lt;= numRooms; i++) {
+  let room = [];
+  room[&#39;timeout&#39;] = [];
+  room[&#39;timeout&#39;][&#39;id&#39;] = 0;
+  room[&#39;timeout&#39;][&#39;s&#39;] = 10;
+  room[&#39;deck&#39;] = [];
+  room[&#39;reverse&#39;] = 0;
+  room[&#39;turn&#39;] = 0;
+  room[&#39;cardOnBoard&#39;] = 0;
+  room[&#39;people&#39;] = 0;
+  let players = [];
+  for (let j = 0; j &lt; maxPeople; j++) {
+    let p = [];
+    p[&#39;id&#39;] = 0;
+    p[&#39;name&#39;] = &quot;&quot;;
+    p[&#39;hand&#39;] = [];
+    players[j] = p;
+  }
+  room[&#39;players&#39;] = players;
+  data[&#39;Room_&#39;+i] = room;
+}</code>
+        </deckgo-highlight-code>
+<hr>
+<h2 id="client-side-preparations" style="position:relative;"><a href="#client-side-preparations" aria-label="client side preparations permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Client-side preparations</h2>
+<p>As seen before, within the <code class="language-text">main.js</code> file there is going to be coded all the game on the client-side.</p>
+<h3 id="connection" style="position:relative;"><a href="#connection" aria-label="connection permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connection</h3>
+<p>Let’s see the first lines of code that will be performed:</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">const socket = io({autoConnect: false});
+const canvas = document.getElementById(&#39;canvas&#39;);;
+const ctx = canvas.getContext(&#39;2d&#39;);
+
+const cdWidth = 240;
+const cdHeight = 360;
+const cards = new Image();
+const back = new Image();
+
+let room;
+let hand = [];
+let turn;
+let playerName;</code>
+        </deckgo-highlight-code>
+<p>We define our <code class="language-text">socket</code> with the flag <code class="language-text">autoConnect</code> to <strong>false</strong>, as we want to define first the player name before connecting to the server. We can see both constants <code class="language-text">cdWidth</code> and <code class="language-text">cdHeight</code> that are the card dimensions within the <a href="https://eperezcosano.github.io/uno-part1/#deck-of-cards">deck image</a>, and finally a few variables that we will use as the <code class="language-text">data</code> of the client to manage the progress of the game.</p>
+<h3 id="player-name-and-cookies" style="position:relative;"><a href="#player-name-and-cookies" aria-label="player name and cookies permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Player name and Cookies</h3>
+<p>For the player name, I think that the best transparent solution is to ask it just once and store it as a cookie in the browser. These two following functions allow us to set and get a cookie in JavaScript.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">function setCookie(name, value, seconds) {
+  let date = new Date();
+  date.setTime(date.getTime() + (seconds * 1000));
+  let expires = &quot;expires=&quot; + date.toUTCString();
+  document.cookie = name + &quot;=&quot; + value + &quot;;&quot; + expires + &quot;;path=/&quot;;
+}
+
+function getCookie(name) {
+  name += &quot;=&quot;;
+  let cookies = document.cookie.split(&#39;;&#39;);
+  for(let i = 0; i &lt; cookies.length; i++) {
+    let cookie = cookies[i];
+    while (cookie.charAt(0) == &#39; &#39;) {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) == 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return null;
+}</code>
+        </deckgo-highlight-code>
+<p>So the first time we play the browser will launch an alert form to fill our name and store it as a cookie, the client will start doing this in the init function which is this the actual first function performing.</p>
+<h3 id="canvas-initialitation" style="position:relative;"><a href="#canvas-initialitation" aria-label="canvas initialitation permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Canvas initialitation</h3>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">function init() {
+  ctx.font = &quot;12px Arial&quot;;
+  canvas.style.backgroundColor = &#39;#10ac84&#39;;
+  cards.src = &#39;images/deck.svg&#39;;
+  back.src = &#39;images/uno.svg&#39;;
+
+  document.addEventListener(&#39;touchstart&#39;, onMouseClick, false);
+  document.addEventListener(&#39;click&#39;, onMouseClick, false);
+
+  playerName = getCookie(&#39;playerName&#39;);
+  if (playerName == null) {
+    playerName = prompt(&#39;Enter your name: &#39;, &#39;Guest&#39;);
+    if (playerName == null || playerName == &quot;&quot;) {
+      playerName = &#39;Guest&#39;;
+    }
+    setCookie(&#39;playerName&#39;, playerName, 24 * 3600);
+  }
+
+  socket.connect();
+}</code>
+        </deckgo-highlight-code>
+<p>First lines are for styling the font, background and loading both deck images to the canvas. Then defines <code class="language-text">click</code> and <code class="language-text">touchstart</code> events that will fire the functions to decide on where the player clicks on the screen (<em>or touches if is on mobile browser</em>). At line 10 starts performing the task of asking the player name. If none is filled will be named as <code class="language-text">Guest</code> the cookie will expire in 24 hours. Finally, the socket performs the connection.</p>
+<hr>
+<h2 id="connection-protocol" style="position:relative;"><a href="#connection-protocol" aria-label="connection protocol permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connection protocol</h2>
+<h3 id="room-request" style="position:relative;"><a href="#room-request" aria-label="room request permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Room request</h3>
+<p>If the connection is successful, the following function is executed to request a room to the server.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">socket.on(&#39;connect&#39;, requestRoom);
+
+function requestRoom() {
+  socket.emit(&#39;requestRoom&#39;, playerName);
+  room = 0;
+  hand = [];
+  turn = false;
+  console.log(&#39;&gt;&gt; Room Request&#39;);
+}</code>
+        </deckgo-highlight-code>
+<p>The server will receive the request and remember that from this point all code is executed from the <code class="language-text">onConnection</code> function as the socket is already linked.</p>
+<p>Whenever a room is requested, looks for a slot for the player, up to 10 players in a room, <code class="language-text">maxRooms</code> and started games are respected.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">/**
+ * Whenever a client connects
+ * @function
+ * @param {Socket} socket Client socket
+ */
+function onConnection(socket) {
+
+  /**
+   * Whenever a room is requested, looks for a slot for the player,
+   * up to 10 players in a room, maxRooms and started games are respected.
+   * @method
+   * @param {String} playerName Player name
+   * @return responseRoom with the name of the room, otherwise error.
+   */
+  socket.on(&#39;requestRoom&#39;, function(playerName) {
+    socket.playerName = playerName;
+    for (let i = 1; i &lt;= numRooms; i++) {
+      let name = &#39;Room_&#39; + i;
+      let people;
+      try {
+        people = io.sockets.adapter.rooms[name].length;
+      } catch (e) {
+        people = 0;
+      }
+      if (people &lt; maxPeople &amp;&amp; data[name][&#39;timeout&#39;][&#39;s&#39;] &gt; 0) {
+        socket.join(name);
+        console.log(&#39;&gt;&gt; User &#39; + socket.playerName +
+        &#39; connected on &#39; + name + &#39; (&#39; + (people + 1) + &#39;/&#39; + maxPeople + &#39;)&#39;);
+        io.to(socket.id).emit(&#39;responseRoom&#39;, name);
+        if (people + 1 &gt;= 2) {
+          clearInterval(data[name][&#39;timeout&#39;][&#39;id&#39;]);
+          data[name][&#39;timeout&#39;][&#39;s&#39;] = 10;
+          data[name][&#39;timeout&#39;][&#39;id&#39;] = setInterval(function() {
+            startingCountdown(name);
+          }, 1000);
+        }
+        return;
+      }
+    }
+    io.to(socket.id).emit(&#39;responseRoom&#39;, &#39;error&#39;);
+    console.log(&#39;&gt;&gt; Rooms exceeded&#39;);
+  });</code>
+        </deckgo-highlight-code>
+<p>Notice that here comes into play a timeout variable. This is because we need to check if a room has already started a game so it will not be possible to join more people. So the way it works is that when the minimum amount of people to play is reached (<em>according to the rules are 2 people</em>) a countdown starts. If anyone more joins the timer starts again from the top and when reaches 0 starts a game. So in summary, every room is open if the timer is still positive and there are less of the maximum amount of players (<em>according to the rules are 10 people</em>).</p>
+<p>This is the function that is executed every second whenever the countdown is active.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">/**
+ * Starts a countdown for start a game on a room
+ * @function
+ * @param {String} name Room name
+ */
+function startingCountdown(name) {
+  let countDown = data[name][&#39;timeout&#39;][&#39;s&#39;]--;
+  io.to(name).emit(&#39;countDown&#39;, countDown);
+  console.log(&#39;&gt;&gt; &#39; + name + &#39;: Starting in &#39; + countDown);
+  if (countDown &lt;= 0) {
+    clearInterval(data[name][&#39;timeout&#39;][&#39;id&#39;]);
+    startGame(name);
+  }
+}</code>
+        </deckgo-highlight-code>
+<p>Remember that every room would have a separated countdown and this is the reason it is stored inside the variable <code class="language-text">data</code> for each room.</p>
+<h3 id="room-response" style="position:relative;"><a href="#room-response" aria-label="room response permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Room Response</h3>
+<p>On the client-side, these two events will be fired upon then.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">socket.on(&#39;responseRoom&#39;, function (name) {
+  if (name != &#39;error&#39;) {
+    room = name;
+    console.log(&#39;&lt;&lt; Room Response: &#39; + name);
+    ctx.fillText(name, 0, 10);
+    ctx.drawImage(back, canvas.width-cdWidth/2-60, canvas.height/2-cdHeight/4, cdWidth/2, cdHeight/2);
+    ctx.fillText(playerName, 100, 390);
+  } else {
+    socket.disconnect();
+    alert(&#39;Rooms are full! Try again later&#39;);
+  }
+});
+
+socket.on(&#39;countDown&#39;, function(countDown) {
+  ctx.clearRect(0, 10, 15, 10);
+  ctx.fillText(countDown, 0, 20);
+});</code>
+        </deckgo-highlight-code>
+<p>The <code class="language-text">responseRoom</code> event will either set up the room by drawing the back card image as representing the deck on the board or if there was an error due to the number of rooms are exceeded thus disconnecting the socket.</p>
+<p>When within the room waiting for more players, the <code class="language-text">countDown</code> event is triggered every second to inform the current situation to the player: drawing a countdown on the canvas.</p>
+<hr>
+<h2 id="starting-a-new-game" style="position:relative;"><a href="#starting-a-new-game" aria-label="starting a new game permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Starting a new game</h2>
+<p>The function that starts a game first checks again if there are at least 2 people in the room.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">/**
+ * Request for start the game.
+ * @param {String} name Room name
+ */
+function startGame(name) {
+  console.log(&#39;&gt;&gt; &#39; + name + &#39;: Requesting game...&#39;);
+  let people;
+  try {
+    people = io.sockets.adapter.rooms[name].length;
+  } catch (e) {
+    console.log(&#39;&gt;&gt; &#39; + name + &#39;: No people here...&#39;);
+    return;
+  }</code>
+        </deckgo-highlight-code>
+<p>Then it assigns every socket id with its player’s name and stores it in the data array of the room</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">  if (people &gt;= 2) {
+    console.log(&#39;&gt;&gt; &#39; + name + &#39;: Starting&#39;);
+    let sockets_ids = Object.keys(io.sockets.adapter.rooms[name].sockets);
+    for (let i = 0; i &lt; people; i++) {
+      data[name][&#39;players&#39;][i][&#39;id&#39;] = sockets_ids[i];
+      let playerName = io.sockets.sockets[sockets_ids[i]].playerName;
+      data[name][&#39;players&#39;][i][&#39;name&#39;] = playerName;
+      console.log(&#39;&gt;&gt; &#39; + name + &#39;: &#39; + playerName +
+                &#39; (&#39; + sockets_ids[i] + &#39;) is Player &#39; + i);
+    }
+
+    data[name][&#39;people&#39;] = people;</code>
+        </deckgo-highlight-code>
+<p>Doing so, later on, we could read easily how many people there are, which are their names and their socket addresses to exchange messages with them.</p>
+<p>Once all the data is ready, it is time to shuffle the deck and deal the cards</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">    //Shuffle a copy of a new deck
+    let newDeck = [...deck];
+    shuffle(newDeck);
+    data[name][&#39;deck&#39;] = newDeck;
+    console.log(&#39;&gt;&gt; &#39; + name + &#39;: Shuffling deck&#39;);</code>
+        </deckgo-highlight-code>
+<p>According to the rules, we have to choose a dealer first and to do so, every player draws a card and who has the higher score is the dealer. Let’s define a function which calculates the score of each card.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">/**
+ * Given a card number, returns its scoring
+ * @function
+ * @param {Number} num Number of the card position in deck
+ * @return {Number} Points value.
+ */
+function cardScore(num) {
+  let points;
+  switch (num % 14) {
+    case 10: //Skip
+    case 11: //Reverse
+    case 12: //Draw 2
+      points = 20;
+      break;
+    case 13: //Wild or Wild Draw 4
+      points = 50;
+      break;
+    default:
+      points = num % 14;
+      break;
+  }
+  return points;
+}</code>
+        </deckgo-highlight-code>
+<p>Now we do that every player draws a card to choose who will be the dealer. In case of a tie, we repeat the process.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">//Every player draws a card.
+//Player with the highest point value is the dealer.
+let scores = new Array(people);
+do {
+	console.log(&#39;&gt;&gt; &#39; + name + &#39;: Deciding dealer&#39;);
+  	for (let i = 0, card = 0, score = 0; i &lt; people; i++) {
+  	card = parseInt(newDeck.shift());
+  		newDeck.push(card);
+      score = cardScore(card);
+      console.log(&#39;&gt;&gt; &#39; + name + &#39;: Player &#39; + i + &#39; draws &#39; + cardType(card) + &#39; &#39; + cardColor(card) + &#39; and gets &#39; + score + &#39; points&#39;);
+       scores[i] = score;
+   }
+} while (new Set(scores).size !== scores.length);
+
+let dealer = scores.indexOf(Math.max(...scores));
+console.log(&#39;&gt;&gt; &#39; + name + &#39;: The dealer is Player &#39; + dealer);</code>
+        </deckgo-highlight-code>
+<p>Whoever has been the dealer, each player is dealt 7 cards.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">for (let i = 0, card = 0; i &lt; people * 7; i++) {
+	let player = (i + dealer + 1) % people;
+	card = parseInt(newDeck.shift());
+	data[name][&#39;players&#39;][player][&#39;hand&#39;].push(card);
+	console.log(&#39;&gt;&gt; &#39; + name + &#39;: Player &#39; + player + &#39; draws &#39; + cardType(card) + &#39; &#39; + cardColor(card));
+}</code>
+        </deckgo-highlight-code>
+<p>The next card is set on top of the board to start playing. However, we avoid wild cards since a staring card, so in that case, we shuffle and draw another.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">let cardOnBoard;
+do {
+	cardOnBoard = parseInt(newDeck.shift());
+	console.log(&#39;&gt;&gt; &#39; + name + &#39;: Card on board &#39; + 					cardType(cardOnBoard) + &#39; &#39; + cardColor(cardOnBoard));
+	if (cardColor(cardOnBoard) == &#39;black&#39;) {
+		newDeck.push(cardOnBoard);
+		console.log(&#39;&gt;&gt; &#39; + name + &#39;: Replacing for another 				card&#39;);
+	} else {
+		break;
+	}
+} while (true);
+data[name][&#39;cardOnBoard&#39;] = cardOnBoard;</code>
+        </deckgo-highlight-code>
+<p>Finally, it is established the whose turn is it and we track the reverse variable if the game is played clockwise or anti-clockwise.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">data[name][&#39;turn&#39;] = (dealer + 1) % people;
+data[name][&#39;reverse&#39;] = 0;</code>
+        </deckgo-highlight-code>
+<p>Nevertheless, the card dealt on the table could change the initial state of the game. Such as a <em>Draw 2</em>, <em>Reverse</em>, or <em>Skip</em> cards.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">if (cardType(cardOnBoard) == &#39;Draw2&#39;) {
+	card = parseInt(newDeck.shift());
+	data[name][&#39;players&#39;][(data[name][&#39;turn&#39;])][&#39;hand&#39;].push(card);
+	console.log(&#39;&gt;&gt; &#39; + name + &#39;: Player &#39; + (dealer + 1 % people) + &#39; draws &#39; + cardType(card) + &#39; &#39; + cardColor(card));
+	card = parseInt(newDeck.shift());
+	data[name][&#39;players&#39;][(data[name][&#39;turn&#39;])][&#39;hand&#39;].push(card);
+	console.log(&#39;&gt;&gt; &#39; + name + &#39;: Player &#39; + (dealer + 1 % people) + &#39; draws &#39; + cardType(card) + &#39; &#39; + cardColor(card));
+	data[name][&#39;turn&#39;] = (dealer + 2) % people;
+} else if (cardType(cardOnBoard) == &#39;Reverse&#39;) {
+	data[name][&#39;turn&#39;] = Math.abs(dealer - 1) % people;
+	data[name][&#39;reverse&#39;] = 1;
+} else if (cardType(cardOnBoard) == &#39;Skip&#39;) {
+  data[name][&#39;turn&#39;] = (dealer + 2) % people;
+}</code>
+        </deckgo-highlight-code>
+<p>Once it is all calculated and prepared on the server-side, we send all the information to the players. Such as their hands, their turn and the card on the table.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">for (let i = 0; i &lt; people; i++) {
+	io.to(data[name][&#39;players&#39;][i][&#39;id&#39;]).emit(&#39;haveCard&#39;, data[name][&#39;players&#39;][i][&#39;hand&#39;]);
+}
+io.to(name).emit(&#39;turnPlayer&#39;, data[name][&#39;players&#39;][(data[name][&#39;turn&#39;])][&#39;id&#39;]);
+io.to(name).emit(&#39;sendCard&#39;, data[name][&#39;cardOnBoard&#39;]);</code>
+        </deckgo-highlight-code>
+<p>On the client-side, these are the two events when triggered, one is to set the turn boolean variable and the other to print the cards on the player’s hand.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">socket.on(&#39;turnPlayer&#39;, function(data) {
+  if (data == socket.id) {
+    turn = true;
+    console.log(&#39;&lt;&lt; Your turn&#39;);
+  } else {
+    turn = false;
+    console.log(&#39;&lt;&lt; Not your turn&#39;);
+  }
+});
+
+socket.on(&#39;haveCard&#39;, function(nums) {
+  hand = nums;
+  ctx.clearRect(0, 400, canvas.width, canvas.height);
+  for (let i = 0; i &lt; hand.length; i++) {
+    ctx.drawImage(cards, 1+cdWidth*(hand[i]%14), 1+cdHeight*Math.floor(hand[i]/14), cdWidth, cdHeight, (hand.length/112)*(cdWidth/3)+(canvas.width/(2+(hand.length-1)))*(i+1)-(cdWidth/4), 400, cdWidth/2, cdHeight/2);
+    console.log(&#39;&lt;&lt; Have card: &#39; + hand[i]);
+  }
+});</code>
+        </deckgo-highlight-code>
+<hr>
+<h2 id="handling-players-disconnection" style="position:relative;"><a href="#handling-players-disconnection" aria-label="handling players disconnection permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Handling players disconnection</h2>
+<p>Is a great idea to handle this issue if we want to improve the robustness a bit. So with these two functions on the server-side are aware if a disconnection is performed.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">  /**
+   * Whenever someone is performing a disconnection,
+   * leave its room and notify to the rest
+   * @method
+   */
+  socket.on(&#39;disconnecting&#39;, function() {
+    room = Object.keys(io.sockets.adapter.sids[socket.id])[1];
+    if (room !== undefined) {
+      clearInterval(data[room][&#39;timeout&#39;][&#39;id&#39;]);
+      io.to(room).emit(&#39;playerDisconnect&#39;, room);
+      console.log(&#39;&gt;&gt; &#39; + room + &#39;: Player &#39; + socket.playerName + &#39; (&#39;+
+                  socket.id + &#39;) leaves the room&#39;);
+    }
+  });
+
+  /**
+   * Whenever disconnection is completed
+   * @method
+   */
+  socket.on(&#39;disconnect&#39;, function() {
+    console.log(&#39;&gt;&gt; Player &#39; + socket.playerName + &#39; (&#39;+
+                socket.id + &#39;) disconnected&#39;);
+  });</code>
+        </deckgo-highlight-code>
+<p>Whenever anyone is disconnecting, we kick them from the room and notify the rest.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">socket.on(&#39;playerDisconnect&#39;, function() {
+  console.log(&#39;&lt;&lt; Player disconnected in &#39; + room);
+});</code>
+        </deckgo-highlight-code>
+<p>For now, is a little step of being able to down if anyone leaves in the middle of a game. But there’s more to do depending on how we want to proceed when it occurs. For example, we could finish the game tie, or allow to the rest keep playing anyways.</p>
+<hr>
+<h2 id="drawing-or-playing-a-card" style="position:relative;"><a href="#drawing-or-playing-a-card" aria-label="drawing or playing a card permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Drawing or playing a card</h2>
+<h3 id="coordinate-system" style="position:relative;"><a href="#coordinate-system" aria-label="coordinate system permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Coordinate system</h3>
+<p><em>How we know which card wants to play or draw the user?</em> After all, there is the only canvas. Once a card is printed on it, we lose track of it, because it becomes part of the whole painting.</p>
+<p>The solution is by remembering the coordinates we left the card on the canvas, so if the player clicks in the area a card is printed, we could recover which card it is by the click coordinates.</p>
+<p>The client-side has the following function which performs that calculation when the click event is triggered.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">function onMouseClick(e) {
+  let lastCard = canvas.offsetLeft + (hand.length/112)*(cdWidth/3)+(canvas.width/(2+(hand.length-1)))*(hand.length)-(cdWidth/4)+cdWidth/2;
+  let initCard = canvas.offsetLeft + 2 + (hand.length/112)*(cdWidth/3)+(canvas.width/(2+(hand.length-1)))-(cdWidth/4);
+
+  if (e.pageY &gt;= 400 &amp;&amp; e.pageY &lt;= 580 &amp;&amp; e.pageX &gt;= initCard &amp;&amp; e.pageX &lt;= lastCard) {
+    for (let i = 0, pos = initCard; i &lt; hand.length; i++, pos += canvas.width/(2+(hand.length-1))) {
+      if (e.pageX &gt;= pos &amp;&amp; e.pageX &lt;= pos+canvas.width/(2+(hand.length-1))) {
+        debugArea(pos, pos+canvas.width/(2+(hand.length-1)), 400, 580);
+        socket.emit(&#39;playCard&#39;, [hand[i], room]);
+        return;
+      }
+    }
+  } else if (e.pageX &gt;= canvas.width-cdWidth/2-60 &amp;&amp;  e.pageX &lt;= canvas.width-60 &amp;&amp;
+    e.pageY &gt;= canvas.height/2-cdHeight/4 &amp;&amp; e.pageY &lt;= canvas.height/2+cdHeight/4) {
+    socket.emit(&#39;drawCard&#39;, [1, room]);
+  }
+}</code>
+        </deckgo-highlight-code>
+<p>The math operations I used are the result of tests that best fit the canvas. Is hard to explain in detail how I come with these but the important is that we can now say what card the player wants to play or draw.</p>
+<h3 id="drawing-a-card" style="position:relative;"><a href="#drawing-a-card" aria-label="drawing a card permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Drawing a card</h3>
+<p>In case they want to draw, the server will recover all the data of the room and if it is their corresponding turn will draw a card from the deck and give it to them. Then emits who is the next turn.</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">socket.on(&#39;drawCard&#39;, function(res) {
+	let numPlayer = data[res[1]][&#39;turn&#39;];
+	let idPlayer = data[res[1]][&#39;players&#39;][numPlayer][&#39;id&#39;];
+	let namePlayer = data[res[1]][&#39;players&#39;][&#39;name&#39;];
+	let handPlayer = data[res[1]][&#39;players&#39;][numPlayer][&#39;hand&#39;];
+	let deck = data[res[1]][&#39;deck&#39;];
+
+	if (idPlayer == socket.id) {
+		let card = parseInt(deck.shift());
+		handPlayer.push(card);
+      io.to(idPlayer).emit(&#39;haveCard&#39;, handPlayer);
+      //deck.push(card);
+      // TODO: Check playable card
+      //Next turn
+      numPlayer = Math.abs(numPlayer + (-1) ** data[res[1]][&#39;reverse&#39;]) % data[res[1]][&#39;people&#39;];
+      data[res[1]][&#39;turn&#39;] = numPlayer;
+      io.to(res[1]).emit(&#39;turnPlayer&#39;, data[res[1]][&#39;players&#39;][numPlayer][&#39;id&#39;]);
+    }
+  });</code>
+        </deckgo-highlight-code>
+<h3 id="playing-a-card" style="position:relative;"><a href="#playing-a-card" aria-label="playing a card permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Playing a card</h3>
+<p>On the other hand, if they want to play a card from their hand, the server will check the rules to check if it is a legal move. </p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">socket.on(&#39;playCard&#39;, function(res) {
+    let numPlayer = data[res[1]][&#39;turn&#39;];
+    let idPlayer = data[res[1]][&#39;players&#39;][numPlayer][&#39;id&#39;];
+    let namePlayer = data[res[1]][&#39;players&#39;][&#39;name&#39;];
+    let handPlayer = data[res[1]][&#39;players&#39;][numPlayer][&#39;hand&#39;];
+    let deck = data[res[1]][&#39;deck&#39;];
+
+    if (idPlayer == socket.id) {
+      let playedColor = cardColor(res[0]);
+      let playedNumber = res[0] % 14;
+
+      let boardColor = cardColor(data[res[1]][&#39;cardOnBoard&#39;]);
+      let boardNumber = data[res[1]][&#39;cardOnBoard&#39;] % 14;
+
+      if (playedColor == &#39;black&#39; || playedColor == boardColor || playedNumber == boardNumber) {
+        // Play card
+        io.to(res[1]).emit(&#39;sendCard&#39;, res[0]);
+        data[res[1]][&#39;cardOnBoard&#39;] = res[0];
+        // Remove card
+        let cardPos = handPlayer.indexOf(res[0]);
+        if (cardPos &gt; -1) {
+          handPlayer.splice(cardPos, 1);
+        }
+        io.to(idPlayer).emit(&#39;haveCard&#39;, handPlayer);
+
+        // Next turn
+        let skip = 0;
+        if (cardType(res[0]) == &#39;Skip&#39;) {
+          skip += 1;
+        } else if (cardType(res[0]) == &#39;Reverse&#39;) {
+          data[res[1]][&#39;reverse&#39;] = (data[res[1]][&#39;reverse&#39;] + 1) % 2;
+        } else if (cardType(res[0]) == &#39;Draw2&#39;) {
+          skip += 1;
+          //draw2
+        } else if (cardType(res[0]) == &#39;Draw4&#39;) {
+          skip += 1;
+          //draw4
+        }
+        numPlayer = Math.abs(numPlayer + (-1) ** data[res[1]][&#39;reverse&#39;] * (1 + skip)) % data[res[1]][&#39;people&#39;];
+        data[res[1]][&#39;turn&#39;] = numPlayer;
+        io.to(res[1]).emit(&#39;turnPlayer&#39;, data[res[1]][&#39;players&#39;][numPlayer][&#39;id&#39;]);
+
+      }
+    }
+  });</code>
+        </deckgo-highlight-code>
+<p>Once done, the server emits the remaining hand and the next player’s turn.</p>
+<h3 id="printing-the-results" style="position:relative;"><a href="#printing-the-results" aria-label="printing the results permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Printing the results</h3>
+<p>Whenever we need to give cards to the players, we use this function to print several cards on their hand</p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">socket.on(&#39;haveCard&#39;, function(nums) {
+  hand = nums;
+  ctx.clearRect(0, 400, canvas.width, canvas.height);
+  for (let i = 0; i &lt; hand.length; i++) {
+    ctx.drawImage(cards, 1+cdWidth*(hand[i]%14), 1+cdHeight*Math.floor(hand[i]/14), cdWidth, cdHeight, (hand.length/112)*(cdWidth/3)+(canvas.width/(2+(hand.length-1)))*(i+1)-(cdWidth/4), 400, cdWidth/2, cdHeight/2);
+    console.log(&#39;&lt;&lt; Have card: &#39; + hand[i]);
+  }
+});</code>
+        </deckgo-highlight-code>
+<p>Or using this other one if we want to add just one </p>
+<deckgo-highlight-code language="javascript"  terminal="carbon" theme="one-dark" line-numbers="true" >
+          <code slot="code">socket.on(&#39;sendCard&#39;, function(num) {
+  ctx.drawImage(cards, 1+cdWidth*(num%14), 1+cdHeight*Math.floor(num/14), cdWidth, cdHeight, canvas.width/2-cdWidth/4, canvas.height/2-cdHeight/4, cdWidth/2, cdHeight/2);
+});</code>
+        </deckgo-highlight-code>
+<hr>
+<h2 id="to-do-list" style="position:relative;"><a href="#to-do-list" aria-label="to do list permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>To-Do List</h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" disabled> Choose colour interface.</li>
+<li class="task-list-item"><input type="checkbox" disabled> What to do when someone disconnects.</li>
+<li class="task-list-item"><input type="checkbox" disabled> In the endgame, saying UNO. </li>
+<li class="task-list-item"><input type="checkbox" disabled> What to do when winning or losing.</li>
+<li class="task-list-item"><input type="checkbox" disabled> Draw more than one card.</li>
+<li class="task-list-item"><input type="checkbox" disabled> Special cards functions.</li>
+</ul></section><hr style="margin-bottom:1.75rem"/><footer><div style="display:flex;margin-bottom:0"><div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:50px;height:50px;margin-right:0.875rem;margin-bottom:0;min-width:50px;border-radius:100%"><img aria-hidden="true" src="data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAUABQDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAQCAwX/xAAWAQEBAQAAAAAAAAAAAAAAAAACAQD/2gAMAwEAAhADEAAAAZ9bsC8ZapVkXMaf/8QAGxAAAgIDAQAAAAAAAAAAAAAAAQIAAxESMSL/2gAIAQEAAQUCrGVanYBFlQ8KsenLVch7/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAEQEf/aAAgBAwEBPwFGCn//xAAVEQEBAAAAAAAAAAAAAAAAAAAQAf/aAAgBAgEBPwEp/8QAHBAAAgICAwAAAAAAAAAAAAAAAAECETFxECEi/9oACAEBAAY/Ai1k9Tp6NmehsiLj/8QAGhAAAwEBAQEAAAAAAAAAAAAAAAERITFBof/aAAgBAQABPyHsF1L368NCgOejKpWwyb04hSRyn3CdQcf/2gAMAwEAAgADAAAAEJ8HP//EABkRAQACAwAAAAAAAAAAAAAAAAEAERAhMf/aAAgBAwEBPxCibirnGP/EABgRAQADAQAAAAAAAAAAAAAAAAEAEDER/9oACAECAQE/EFTJ2ar/xAAfEAEAAgICAgMAAAAAAAAAAAABABEhMUGxUXGRweH/2gAIAQEAAT8Qp3gp8VGZKyQKaxCl4aBBp3dxl9ha966glR4DmvyBwKuqv7gzCmXbEAhzHFqf/9k=" alt="Izan Pérez Cosano" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:500ms;border-radius:50%"/><noscript><picture><source srcset="/static/d06e0d64356ff5f6b06b5cf7997977ef/99438/profile-pic.jpg 1x,
+/static/d06e0d64356ff5f6b06b5cf7997977ef/aba1d/profile-pic.jpg 1.5x,
+/static/d06e0d64356ff5f6b06b5cf7997977ef/b315d/profile-pic.jpg 2x" /><img loading="lazy" width="50" height="50" srcset="/static/d06e0d64356ff5f6b06b5cf7997977ef/99438/profile-pic.jpg 1x,
+/static/d06e0d64356ff5f6b06b5cf7997977ef/aba1d/profile-pic.jpg 1.5x,
+/static/d06e0d64356ff5f6b06b5cf7997977ef/b315d/profile-pic.jpg 2x" src="/static/d06e0d64356ff5f6b06b5cf7997977ef/99438/profile-pic.jpg" alt="Izan Pérez Cosano" style="position:absolute;top:0;left:0;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center"/></picture></noscript></div><p>Written by <strong>Izan Pérez Cosano</strong><br/><a href="https://github.com/eperezcosano">GitHub Profile</a><br/>Telecommunications and Telematics Engineer at the Polytechnic University of Catalonia.<!-- --> <a href="https://www.linkedin.com/in/izan-pérez-cosano-58033218a/">LinkedIn Profile</a></p></div></footer></article><nav><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/uno-part1/">← <!-- -->Creating the UNO game on JavaScript. (Part I)</a></li><li></li></ul></nav></main><footer>© <!-- -->2020<!-- -->, Made with<!-- --> ♥ <!-- --> in Malmö</footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/uno-part2/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-410ebca7345378f68a64.js"],"component---src-pages-404-js":["/component---src-pages-404-js-9578b926700cf49bb4fc.js"],"component---src-pages-index-js":["/component---src-pages-index-js-378b8329cfe83c3c81fd.js"],"component---src-pages-using-typescript-tsx":["/component---src-pages-using-typescript-tsx-f16d60f62c7d2b3e9bcc.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-f238a360ee530ace5f5c.js"],"polyfills-dom":["/polyfills-dom-edd05a3dbba583a940d7.js"],"polyfills-core-js":["/polyfills-core-js-0e1bbfee743a2634ec10.js"],"polyfills-css-shim":["/polyfills-css-shim-117ddaafbe01afd99b5b.js"]};/*]]>*/</script><script src="/component---src-templates-blog-post-js-f238a360ee530ace5f5c.js" async=""></script><script src="/cd7d5f864fc9e15ed8adef086269b0aeff617554-63c84ed6e391f9619bf3.js" async=""></script><script src="/commons-9c2372e0327e826158ff.js" async=""></script><script src="/app-410ebca7345378f68a64.js" async=""></script><script src="/styles-24c541b6ac347bae38f1.js" async=""></script><script src="/framework-5fc6169171e885c3b522.js" async=""></script><script src="/webpack-runtime-75ee461a077d7dcfd9bc.js" async=""></script></body></html>

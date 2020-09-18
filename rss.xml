@@ -1,18 +1,635 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Home]]></title><description><![CDATA[My personal blog of my programming proyects.]]></description><link>https://eperezcosano.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 09 Sep 2020 12:06:17 GMT</lastBuildDate><item><title><![CDATA[Creating the UNO game on JavaScript. (Part I)]]></title><description><![CDATA[In this article, I am going to explain step by step everything I came up to create the popular UNO game from scratch just in a simple canvas…]]></description><link>https://eperezcosano.github.io/uno-part1/</link><guid isPermaLink="false">https://eperezcosano.github.io/uno-part1/</guid><pubDate>Fri, 31 Jul 2020 15:52:04 GMT</pubDate><content:encoded>&lt;p&gt;In this article, I am going to explain step by step everything I came up to create the popular UNO game from scratch just in a simple canvas for the end-user that is going to play giving them a lightest client, just the browser. To do so, all code is in JavaScript. On the server-side, we manage a Node.JS server to attend all requests performed by users connected through SocketIO.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Home]]></title><description><![CDATA[My personal blog of my programming proyects.]]></description><link>https://eperezcosano.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 18 Sep 2020 14:33:09 GMT</lastBuildDate><item><title><![CDATA[Creating the UNO game on JavaScript. (Part II)]]></title><description><![CDATA[Here there is a continuation of the last article explaining how to start a  project to achieve a basic client-server side installation and a…]]></description><link>https://eperezcosano.github.io/uno-part2/</link><guid isPermaLink="false">https://eperezcosano.github.io/uno-part2/</guid><pubDate>Fri, 18 Sep 2020 12:24:39 GMT</pubDate><content:encoded>&lt;p&gt;Here there is a continuation of the &lt;a href=&quot;https://eperezcosano.github.io/uno-part1/&quot;&gt;last article&lt;/a&gt; explaining how to start a  project to achieve a basic client-server side installation and a few concepts to how to loop through the deck of cards by associating numbers to each card. In this part, let’s start by creating the protocol will follow the client to connect to the server such as the messages and parameters exchanges.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;contents&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#contents&quot; aria-label=&quot;contents permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Contents&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#server-side-preparations&quot;&gt;Server-side preparations&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#recap&quot;&gt;Recap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#rooms-and-players&quot;&gt;Rooms and players&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#the-deck-of-cards&quot;&gt;The deck of cards&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#game-data&quot;&gt;Game Data&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#client-side-preparations&quot;&gt;Client-side preparations&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#connection&quot;&gt;Connection&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#player-name-and-cookies&quot;&gt;Player name and Cookies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#canvas-initialitation&quot;&gt;Canvas initialitation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#connection-protocol&quot;&gt;Connection protocol&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#room-request&quot;&gt;Room request&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#room-response&quot;&gt;Room Response&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#starting-a-new-game&quot;&gt;Starting a new game&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#handling-players-disconnection&quot;&gt;Handling players disconnection&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;#drawing-or-playing-a-card&quot;&gt;Drawing or playing a card&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#coordinate-system&quot;&gt;Coordinate system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#drawing-a-card&quot;&gt;Drawing a card&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#playing-a-card&quot;&gt;Playing a card&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#printing-the-results&quot;&gt;Printing the results&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#to-do-list&quot;&gt;To-Do List&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;server-side-preparations&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#server-side-preparations&quot; aria-label=&quot;server side preparations permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Server-side preparations&lt;/h2&gt;
+&lt;h3 id=&quot;recap&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#recap&quot; aria-label=&quot;recap permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Recap&lt;/h3&gt;
+&lt;p&gt;In summary, as seen before, the server starts by performing this first lines of code:&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;const express = require(&amp;#39;express&amp;#39;);
+const app = express();
+const http = require(&amp;#39;http&amp;#39;).Server(app);
+const io = require(&amp;#39;socket.io&amp;#39;)(http);
+const port = process.env.PORT || 3000;
+
+app.use(express.static(__dirname + &amp;#39;/public&amp;#39;));
+io.on(&amp;#39;connection&amp;#39;, onConnection);
+http.listen(port, () =&amp;gt; console.log(&amp;#39;listening on port &amp;#39; + port));&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3 id=&quot;rooms-and-players&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#rooms-and-players&quot; aria-label=&quot;rooms and players permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Rooms and players&lt;/h3&gt;
+&lt;p&gt;The way I think the game could be playable by several groups of people is to define &lt;em&gt;Rooms&lt;/em&gt;.  The idea is that within each room will be running a UNO game and will be isolated by the other rooms, so different groups of players can join. &lt;/p&gt;
+&lt;p&gt;At this point, we have to write the game rules in our code, I have chosen the &lt;a href=&quot;https://service.mattel.com/instruction_sheets/42001pr.pdf&quot;&gt;official UNO rules from this sheet&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We can be starting by creating a couple of constants indicating the maximum of rooms the server could handle and how many people can be within each room.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;const numRooms = 5;
+const maxPeople = 10;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3 id=&quot;the-deck-of-cards&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#the-deck-of-cards&quot; aria-label=&quot;the deck of cards permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;The deck of cards&lt;/h3&gt;
+&lt;p&gt;Let’s continue by defining the deck of cards, as seen before, each card will be represented by consecutive numbers up to 112. So a simple array storing these numbers will be the representation of the actual deck of cards.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;let deck = Array.apply(null, Array(112)).map(function (_, i) {return i;});&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;However, keep in mind that there are 112 is because there are blank cards, but since we need to discard them to play, we use the &lt;em&gt;slice&lt;/em&gt; function in order remove the element from the array. Notice that the cards following a blank card will stay the same, as we want the &lt;em&gt;actual position in the deck scheme image&lt;/em&gt;, so, for example, the first blank card is in the 56th position and by discarding it, its neighbours stay at 55 and 57. The following code is performed for the four blank cards.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;deck.splice(56, 1); //56
+deck.splice(69, 1); //70
+deck.splice(82, 1); //84
+deck.splice(95, 1); //98&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Last but not least, is to define a `shuffle function that will be pretty handy to deliver a shuffled deck to every room.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;/**
+ * Shuffles all elements in array
+ * @function
+ * @param {Array} to shuffle
+ */
+function shuffle(a) {
+  let j, x, i;
+  for (i = a.length - 1; i &amp;gt; 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3 id=&quot;game-data&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#game-data&quot; aria-label=&quot;game data permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Game data&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;How will the server remember whose turn is it or what card is the table to calculate a legal play?&lt;/em&gt; The easiest solution is by creating an array on the flight right before starting any game which will store vary useful information for the progression of the game, such as, the actual remaining deck, the reverse orientation turn, card on board, and the information of the players: names, cards on hand, etcetera. Further details will be explained as we continue.  So this code will create an array on which room is stored as &lt;code class=&quot;language-text&quot;&gt;data[Room_N]&lt;/code&gt; being &lt;code class=&quot;language-text&quot;&gt;N&lt;/code&gt; the current number room.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;let data = [];
+for (let i = 1; i &amp;lt;= numRooms; i++) {
+  let room = [];
+  room[&amp;#39;timeout&amp;#39;] = [];
+  room[&amp;#39;timeout&amp;#39;][&amp;#39;id&amp;#39;] = 0;
+  room[&amp;#39;timeout&amp;#39;][&amp;#39;s&amp;#39;] = 10;
+  room[&amp;#39;deck&amp;#39;] = [];
+  room[&amp;#39;reverse&amp;#39;] = 0;
+  room[&amp;#39;turn&amp;#39;] = 0;
+  room[&amp;#39;cardOnBoard&amp;#39;] = 0;
+  room[&amp;#39;people&amp;#39;] = 0;
+  let players = [];
+  for (let j = 0; j &amp;lt; maxPeople; j++) {
+    let p = [];
+    p[&amp;#39;id&amp;#39;] = 0;
+    p[&amp;#39;name&amp;#39;] = &amp;quot;&amp;quot;;
+    p[&amp;#39;hand&amp;#39;] = [];
+    players[j] = p;
+  }
+  room[&amp;#39;players&amp;#39;] = players;
+  data[&amp;#39;Room_&amp;#39;+i] = room;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;client-side-preparations&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#client-side-preparations&quot; aria-label=&quot;client side preparations permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Client-side preparations&lt;/h2&gt;
+&lt;p&gt;As seen before, within the &lt;code class=&quot;language-text&quot;&gt;main.js&lt;/code&gt; file there is going to be coded all the game on the client-side.&lt;/p&gt;
+&lt;h3 id=&quot;connection&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#connection&quot; aria-label=&quot;connection permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Connection&lt;/h3&gt;
+&lt;p&gt;Let’s see the first lines of code that will be performed:&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;const socket = io({autoConnect: false});
+const canvas = document.getElementById(&amp;#39;canvas&amp;#39;);;
+const ctx = canvas.getContext(&amp;#39;2d&amp;#39;);
+
+const cdWidth = 240;
+const cdHeight = 360;
+const cards = new Image();
+const back = new Image();
+
+let room;
+let hand = [];
+let turn;
+let playerName;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;We define our &lt;code class=&quot;language-text&quot;&gt;socket&lt;/code&gt; with the flag &lt;code class=&quot;language-text&quot;&gt;autoConnect&lt;/code&gt; to &lt;strong&gt;false&lt;/strong&gt;, as we want to define first the player name before connecting to the server. We can see both constants &lt;code class=&quot;language-text&quot;&gt;cdWidth&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;cdHeight&lt;/code&gt; that are the card dimensions within the &lt;a href=&quot;https://eperezcosano.github.io/uno-part1/#deck-of-cards&quot;&gt;deck image&lt;/a&gt;, and finally a few variables that we will use as the &lt;code class=&quot;language-text&quot;&gt;data&lt;/code&gt; of the client to manage the progress of the game.&lt;/p&gt;
+&lt;h3 id=&quot;player-name-and-cookies&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#player-name-and-cookies&quot; aria-label=&quot;player name and cookies permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Player name and Cookies&lt;/h3&gt;
+&lt;p&gt;For the player name, I think that the best transparent solution is to ask it just once and store it as a cookie in the browser. These two following functions allow us to set and get a cookie in JavaScript.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;function setCookie(name, value, seconds) {
+  let date = new Date();
+  date.setTime(date.getTime() + (seconds * 1000));
+  let expires = &amp;quot;expires=&amp;quot; + date.toUTCString();
+  document.cookie = name + &amp;quot;=&amp;quot; + value + &amp;quot;;&amp;quot; + expires + &amp;quot;;path=/&amp;quot;;
+}
+
+function getCookie(name) {
+  name += &amp;quot;=&amp;quot;;
+  let cookies = document.cookie.split(&amp;#39;;&amp;#39;);
+  for(let i = 0; i &amp;lt; cookies.length; i++) {
+    let cookie = cookies[i];
+    while (cookie.charAt(0) == &amp;#39; &amp;#39;) {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) == 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return null;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;So the first time we play the browser will launch an alert form to fill our name and store it as a cookie, the client will start doing this in the init function which is this the actual first function performing.&lt;/p&gt;
+&lt;h3 id=&quot;canvas-initialitation&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#canvas-initialitation&quot; aria-label=&quot;canvas initialitation permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Canvas initialitation&lt;/h3&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;function init() {
+  ctx.font = &amp;quot;12px Arial&amp;quot;;
+  canvas.style.backgroundColor = &amp;#39;#10ac84&amp;#39;;
+  cards.src = &amp;#39;images/deck.svg&amp;#39;;
+  back.src = &amp;#39;images/uno.svg&amp;#39;;
+
+  document.addEventListener(&amp;#39;touchstart&amp;#39;, onMouseClick, false);
+  document.addEventListener(&amp;#39;click&amp;#39;, onMouseClick, false);
+
+  playerName = getCookie(&amp;#39;playerName&amp;#39;);
+  if (playerName == null) {
+    playerName = prompt(&amp;#39;Enter your name: &amp;#39;, &amp;#39;Guest&amp;#39;);
+    if (playerName == null || playerName == &amp;quot;&amp;quot;) {
+      playerName = &amp;#39;Guest&amp;#39;;
+    }
+    setCookie(&amp;#39;playerName&amp;#39;, playerName, 24 * 3600);
+  }
+
+  socket.connect();
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;First lines are for styling the font, background and loading both deck images to the canvas. Then defines &lt;code class=&quot;language-text&quot;&gt;click&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;touchstart&lt;/code&gt; events that will fire the functions to decide on where the player clicks on the screen (&lt;em&gt;or touches if is on mobile browser&lt;/em&gt;). At line 10 starts performing the task of asking the player name. If none is filled will be named as &lt;code class=&quot;language-text&quot;&gt;Guest&lt;/code&gt; the cookie will expire in 24 hours. Finally, the socket performs the connection.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;connection-protocol&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#connection-protocol&quot; aria-label=&quot;connection protocol permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Connection protocol&lt;/h2&gt;
+&lt;h3 id=&quot;room-request&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#room-request&quot; aria-label=&quot;room request permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Room request&lt;/h3&gt;
+&lt;p&gt;If the connection is successful, the following function is executed to request a room to the server.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;socket.on(&amp;#39;connect&amp;#39;, requestRoom);
+
+function requestRoom() {
+  socket.emit(&amp;#39;requestRoom&amp;#39;, playerName);
+  room = 0;
+  hand = [];
+  turn = false;
+  console.log(&amp;#39;&amp;gt;&amp;gt; Room Request&amp;#39;);
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;The server will receive the request and remember that from this point all code is executed from the &lt;code class=&quot;language-text&quot;&gt;onConnection&lt;/code&gt; function as the socket is already linked.&lt;/p&gt;
+&lt;p&gt;Whenever a room is requested, looks for a slot for the player, up to 10 players in a room, &lt;code class=&quot;language-text&quot;&gt;maxRooms&lt;/code&gt; and started games are respected.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;/**
+ * Whenever a client connects
+ * @function
+ * @param {Socket} socket Client socket
+ */
+function onConnection(socket) {
+
+  /**
+   * Whenever a room is requested, looks for a slot for the player,
+   * up to 10 players in a room, maxRooms and started games are respected.
+   * @method
+   * @param {String} playerName Player name
+   * @return responseRoom with the name of the room, otherwise error.
+   */
+  socket.on(&amp;#39;requestRoom&amp;#39;, function(playerName) {
+    socket.playerName = playerName;
+    for (let i = 1; i &amp;lt;= numRooms; i++) {
+      let name = &amp;#39;Room_&amp;#39; + i;
+      let people;
+      try {
+        people = io.sockets.adapter.rooms[name].length;
+      } catch (e) {
+        people = 0;
+      }
+      if (people &amp;lt; maxPeople &amp;amp;&amp;amp; data[name][&amp;#39;timeout&amp;#39;][&amp;#39;s&amp;#39;] &amp;gt; 0) {
+        socket.join(name);
+        console.log(&amp;#39;&amp;gt;&amp;gt; User &amp;#39; + socket.playerName +
+        &amp;#39; connected on &amp;#39; + name + &amp;#39; (&amp;#39; + (people + 1) + &amp;#39;/&amp;#39; + maxPeople + &amp;#39;)&amp;#39;);
+        io.to(socket.id).emit(&amp;#39;responseRoom&amp;#39;, name);
+        if (people + 1 &amp;gt;= 2) {
+          clearInterval(data[name][&amp;#39;timeout&amp;#39;][&amp;#39;id&amp;#39;]);
+          data[name][&amp;#39;timeout&amp;#39;][&amp;#39;s&amp;#39;] = 10;
+          data[name][&amp;#39;timeout&amp;#39;][&amp;#39;id&amp;#39;] = setInterval(function() {
+            startingCountdown(name);
+          }, 1000);
+        }
+        return;
+      }
+    }
+    io.to(socket.id).emit(&amp;#39;responseRoom&amp;#39;, &amp;#39;error&amp;#39;);
+    console.log(&amp;#39;&amp;gt;&amp;gt; Rooms exceeded&amp;#39;);
+  });&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Notice that here comes into play a timeout variable. This is because we need to check if a room has already started a game so it will not be possible to join more people. So the way it works is that when the minimum amount of people to play is reached (&lt;em&gt;according to the rules are 2 people&lt;/em&gt;) a countdown starts. If anyone more joins the timer starts again from the top and when reaches 0 starts a game. So in summary, every room is open if the timer is still positive and there are less of the maximum amount of players (&lt;em&gt;according to the rules are 10 people&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;This is the function that is executed every second whenever the countdown is active.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;/**
+ * Starts a countdown for start a game on a room
+ * @function
+ * @param {String} name Room name
+ */
+function startingCountdown(name) {
+  let countDown = data[name][&amp;#39;timeout&amp;#39;][&amp;#39;s&amp;#39;]--;
+  io.to(name).emit(&amp;#39;countDown&amp;#39;, countDown);
+  console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Starting in &amp;#39; + countDown);
+  if (countDown &amp;lt;= 0) {
+    clearInterval(data[name][&amp;#39;timeout&amp;#39;][&amp;#39;id&amp;#39;]);
+    startGame(name);
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Remember that every room would have a separated countdown and this is the reason it is stored inside the variable &lt;code class=&quot;language-text&quot;&gt;data&lt;/code&gt; for each room.&lt;/p&gt;
+&lt;h3 id=&quot;room-response&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#room-response&quot; aria-label=&quot;room response permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Room Response&lt;/h3&gt;
+&lt;p&gt;On the client-side, these two events will be fired upon then.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;socket.on(&amp;#39;responseRoom&amp;#39;, function (name) {
+  if (name != &amp;#39;error&amp;#39;) {
+    room = name;
+    console.log(&amp;#39;&amp;lt;&amp;lt; Room Response: &amp;#39; + name);
+    ctx.fillText(name, 0, 10);
+    ctx.drawImage(back, canvas.width-cdWidth/2-60, canvas.height/2-cdHeight/4, cdWidth/2, cdHeight/2);
+    ctx.fillText(playerName, 100, 390);
+  } else {
+    socket.disconnect();
+    alert(&amp;#39;Rooms are full! Try again later&amp;#39;);
+  }
+});
+
+socket.on(&amp;#39;countDown&amp;#39;, function(countDown) {
+  ctx.clearRect(0, 10, 15, 10);
+  ctx.fillText(countDown, 0, 20);
+});&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;responseRoom&lt;/code&gt; event will either set up the room by drawing the back card image as representing the deck on the board or if there was an error due to the number of rooms are exceeded thus disconnecting the socket.&lt;/p&gt;
+&lt;p&gt;When within the room waiting for more players, the &lt;code class=&quot;language-text&quot;&gt;countDown&lt;/code&gt; event is triggered every second to inform the current situation to the player: drawing a countdown on the canvas.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;starting-a-new-game&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#starting-a-new-game&quot; aria-label=&quot;starting a new game permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Starting a new game&lt;/h2&gt;
+&lt;p&gt;The function that starts a game first checks again if there are at least 2 people in the room.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;/**
+ * Request for start the game.
+ * @param {String} name Room name
+ */
+function startGame(name) {
+  console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Requesting game...&amp;#39;);
+  let people;
+  try {
+    people = io.sockets.adapter.rooms[name].length;
+  } catch (e) {
+    console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: No people here...&amp;#39;);
+    return;
+  }&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Then it assigns every socket id with its player’s name and stores it in the data array of the room&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;  if (people &amp;gt;= 2) {
+    console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Starting&amp;#39;);
+    let sockets_ids = Object.keys(io.sockets.adapter.rooms[name].sockets);
+    for (let i = 0; i &amp;lt; people; i++) {
+      data[name][&amp;#39;players&amp;#39;][i][&amp;#39;id&amp;#39;] = sockets_ids[i];
+      let playerName = io.sockets.sockets[sockets_ids[i]].playerName;
+      data[name][&amp;#39;players&amp;#39;][i][&amp;#39;name&amp;#39;] = playerName;
+      console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: &amp;#39; + playerName +
+                &amp;#39; (&amp;#39; + sockets_ids[i] + &amp;#39;) is Player &amp;#39; + i);
+    }
+
+    data[name][&amp;#39;people&amp;#39;] = people;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Doing so, later on, we could read easily how many people there are, which are their names and their socket addresses to exchange messages with them.&lt;/p&gt;
+&lt;p&gt;Once all the data is ready, it is time to shuffle the deck and deal the cards&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;    //Shuffle a copy of a new deck
+    let newDeck = [...deck];
+    shuffle(newDeck);
+    data[name][&amp;#39;deck&amp;#39;] = newDeck;
+    console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Shuffling deck&amp;#39;);&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;According to the rules, we have to choose a dealer first and to do so, every player draws a card and who has the higher score is the dealer. Let’s define a function which calculates the score of each card.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;/**
+ * Given a card number, returns its scoring
+ * @function
+ * @param {Number} num Number of the card position in deck
+ * @return {Number} Points value.
+ */
+function cardScore(num) {
+  let points;
+  switch (num % 14) {
+    case 10: //Skip
+    case 11: //Reverse
+    case 12: //Draw 2
+      points = 20;
+      break;
+    case 13: //Wild or Wild Draw 4
+      points = 50;
+      break;
+    default:
+      points = num % 14;
+      break;
+  }
+  return points;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Now we do that every player draws a card to choose who will be the dealer. In case of a tie, we repeat the process.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;//Every player draws a card.
+//Player with the highest point value is the dealer.
+let scores = new Array(people);
+do {
+	console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Deciding dealer&amp;#39;);
+  	for (let i = 0, card = 0, score = 0; i &amp;lt; people; i++) {
+  	card = parseInt(newDeck.shift());
+  		newDeck.push(card);
+      score = cardScore(card);
+      console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Player &amp;#39; + i + &amp;#39; draws &amp;#39; + cardType(card) + &amp;#39; &amp;#39; + cardColor(card) + &amp;#39; and gets &amp;#39; + score + &amp;#39; points&amp;#39;);
+       scores[i] = score;
+   }
+} while (new Set(scores).size !== scores.length);
+
+let dealer = scores.indexOf(Math.max(...scores));
+console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: The dealer is Player &amp;#39; + dealer);&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Whoever has been the dealer, each player is dealt 7 cards.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;for (let i = 0, card = 0; i &amp;lt; people * 7; i++) {
+	let player = (i + dealer + 1) % people;
+	card = parseInt(newDeck.shift());
+	data[name][&amp;#39;players&amp;#39;][player][&amp;#39;hand&amp;#39;].push(card);
+	console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Player &amp;#39; + player + &amp;#39; draws &amp;#39; + cardType(card) + &amp;#39; &amp;#39; + cardColor(card));
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;The next card is set on top of the board to start playing. However, we avoid wild cards since a staring card, so in that case, we shuffle and draw another.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;let cardOnBoard;
+do {
+	cardOnBoard = parseInt(newDeck.shift());
+	console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Card on board &amp;#39; + 					cardType(cardOnBoard) + &amp;#39; &amp;#39; + cardColor(cardOnBoard));
+	if (cardColor(cardOnBoard) == &amp;#39;black&amp;#39;) {
+		newDeck.push(cardOnBoard);
+		console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Replacing for another 				card&amp;#39;);
+	} else {
+		break;
+	}
+} while (true);
+data[name][&amp;#39;cardOnBoard&amp;#39;] = cardOnBoard;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Finally, it is established the whose turn is it and we track the reverse variable if the game is played clockwise or anti-clockwise.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;data[name][&amp;#39;turn&amp;#39;] = (dealer + 1) % people;
+data[name][&amp;#39;reverse&amp;#39;] = 0;&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Nevertheless, the card dealt on the table could change the initial state of the game. Such as a &lt;em&gt;Draw 2&lt;/em&gt;, &lt;em&gt;Reverse&lt;/em&gt;, or &lt;em&gt;Skip&lt;/em&gt; cards.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;if (cardType(cardOnBoard) == &amp;#39;Draw2&amp;#39;) {
+	card = parseInt(newDeck.shift());
+	data[name][&amp;#39;players&amp;#39;][(data[name][&amp;#39;turn&amp;#39;])][&amp;#39;hand&amp;#39;].push(card);
+	console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Player &amp;#39; + (dealer + 1 % people) + &amp;#39; draws &amp;#39; + cardType(card) + &amp;#39; &amp;#39; + cardColor(card));
+	card = parseInt(newDeck.shift());
+	data[name][&amp;#39;players&amp;#39;][(data[name][&amp;#39;turn&amp;#39;])][&amp;#39;hand&amp;#39;].push(card);
+	console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + name + &amp;#39;: Player &amp;#39; + (dealer + 1 % people) + &amp;#39; draws &amp;#39; + cardType(card) + &amp;#39; &amp;#39; + cardColor(card));
+	data[name][&amp;#39;turn&amp;#39;] = (dealer + 2) % people;
+} else if (cardType(cardOnBoard) == &amp;#39;Reverse&amp;#39;) {
+	data[name][&amp;#39;turn&amp;#39;] = Math.abs(dealer - 1) % people;
+	data[name][&amp;#39;reverse&amp;#39;] = 1;
+} else if (cardType(cardOnBoard) == &amp;#39;Skip&amp;#39;) {
+  data[name][&amp;#39;turn&amp;#39;] = (dealer + 2) % people;
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Once it is all calculated and prepared on the server-side, we send all the information to the players. Such as their hands, their turn and the card on the table.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;for (let i = 0; i &amp;lt; people; i++) {
+	io.to(data[name][&amp;#39;players&amp;#39;][i][&amp;#39;id&amp;#39;]).emit(&amp;#39;haveCard&amp;#39;, data[name][&amp;#39;players&amp;#39;][i][&amp;#39;hand&amp;#39;]);
+}
+io.to(name).emit(&amp;#39;turnPlayer&amp;#39;, data[name][&amp;#39;players&amp;#39;][(data[name][&amp;#39;turn&amp;#39;])][&amp;#39;id&amp;#39;]);
+io.to(name).emit(&amp;#39;sendCard&amp;#39;, data[name][&amp;#39;cardOnBoard&amp;#39;]);&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;On the client-side, these are the two events when triggered, one is to set the turn boolean variable and the other to print the cards on the player’s hand.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;socket.on(&amp;#39;turnPlayer&amp;#39;, function(data) {
+  if (data == socket.id) {
+    turn = true;
+    console.log(&amp;#39;&amp;lt;&amp;lt; Your turn&amp;#39;);
+  } else {
+    turn = false;
+    console.log(&amp;#39;&amp;lt;&amp;lt; Not your turn&amp;#39;);
+  }
+});
+
+socket.on(&amp;#39;haveCard&amp;#39;, function(nums) {
+  hand = nums;
+  ctx.clearRect(0, 400, canvas.width, canvas.height);
+  for (let i = 0; i &amp;lt; hand.length; i++) {
+    ctx.drawImage(cards, 1+cdWidth*(hand[i]%14), 1+cdHeight*Math.floor(hand[i]/14), cdWidth, cdHeight, (hand.length/112)*(cdWidth/3)+(canvas.width/(2+(hand.length-1)))*(i+1)-(cdWidth/4), 400, cdWidth/2, cdHeight/2);
+    console.log(&amp;#39;&amp;lt;&amp;lt; Have card: &amp;#39; + hand[i]);
+  }
+});&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;handling-players-disconnection&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#handling-players-disconnection&quot; aria-label=&quot;handling players disconnection permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Handling players disconnection&lt;/h2&gt;
+&lt;p&gt;Is a great idea to handle this issue if we want to improve the robustness a bit. So with these two functions on the server-side are aware if a disconnection is performed.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;  /**
+   * Whenever someone is performing a disconnection,
+   * leave its room and notify to the rest
+   * @method
+   */
+  socket.on(&amp;#39;disconnecting&amp;#39;, function() {
+    room = Object.keys(io.sockets.adapter.sids[socket.id])[1];
+    if (room !== undefined) {
+      clearInterval(data[room][&amp;#39;timeout&amp;#39;][&amp;#39;id&amp;#39;]);
+      io.to(room).emit(&amp;#39;playerDisconnect&amp;#39;, room);
+      console.log(&amp;#39;&amp;gt;&amp;gt; &amp;#39; + room + &amp;#39;: Player &amp;#39; + socket.playerName + &amp;#39; (&amp;#39;+
+                  socket.id + &amp;#39;) leaves the room&amp;#39;);
+    }
+  });
+
+  /**
+   * Whenever disconnection is completed
+   * @method
+   */
+  socket.on(&amp;#39;disconnect&amp;#39;, function() {
+    console.log(&amp;#39;&amp;gt;&amp;gt; Player &amp;#39; + socket.playerName + &amp;#39; (&amp;#39;+
+                socket.id + &amp;#39;) disconnected&amp;#39;);
+  });&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Whenever anyone is disconnecting, we kick them from the room and notify the rest.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;socket.on(&amp;#39;playerDisconnect&amp;#39;, function() {
+  console.log(&amp;#39;&amp;lt;&amp;lt; Player disconnected in &amp;#39; + room);
+});&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;For now, is a little step of being able to down if anyone leaves in the middle of a game. But there’s more to do depending on how we want to proceed when it occurs. For example, we could finish the game tie, or allow to the rest keep playing anyways.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;drawing-or-playing-a-card&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#drawing-or-playing-a-card&quot; aria-label=&quot;drawing or playing a card permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Drawing or playing a card&lt;/h2&gt;
+&lt;h3 id=&quot;coordinate-system&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#coordinate-system&quot; aria-label=&quot;coordinate system permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Coordinate system&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;How we know which card wants to play or draw the user?&lt;/em&gt; After all, there is the only canvas. Once a card is printed on it, we lose track of it, because it becomes part of the whole painting.&lt;/p&gt;
+&lt;p&gt;The solution is by remembering the coordinates we left the card on the canvas, so if the player clicks in the area a card is printed, we could recover which card it is by the click coordinates.&lt;/p&gt;
+&lt;p&gt;The client-side has the following function which performs that calculation when the click event is triggered.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;function onMouseClick(e) {
+  let lastCard = canvas.offsetLeft + (hand.length/112)*(cdWidth/3)+(canvas.width/(2+(hand.length-1)))*(hand.length)-(cdWidth/4)+cdWidth/2;
+  let initCard = canvas.offsetLeft + 2 + (hand.length/112)*(cdWidth/3)+(canvas.width/(2+(hand.length-1)))-(cdWidth/4);
+
+  if (e.pageY &amp;gt;= 400 &amp;amp;&amp;amp; e.pageY &amp;lt;= 580 &amp;amp;&amp;amp; e.pageX &amp;gt;= initCard &amp;amp;&amp;amp; e.pageX &amp;lt;= lastCard) {
+    for (let i = 0, pos = initCard; i &amp;lt; hand.length; i++, pos += canvas.width/(2+(hand.length-1))) {
+      if (e.pageX &amp;gt;= pos &amp;amp;&amp;amp; e.pageX &amp;lt;= pos+canvas.width/(2+(hand.length-1))) {
+        debugArea(pos, pos+canvas.width/(2+(hand.length-1)), 400, 580);
+        socket.emit(&amp;#39;playCard&amp;#39;, [hand[i], room]);
+        return;
+      }
+    }
+  } else if (e.pageX &amp;gt;= canvas.width-cdWidth/2-60 &amp;amp;&amp;amp;  e.pageX &amp;lt;= canvas.width-60 &amp;amp;&amp;amp;
+    e.pageY &amp;gt;= canvas.height/2-cdHeight/4 &amp;amp;&amp;amp; e.pageY &amp;lt;= canvas.height/2+cdHeight/4) {
+    socket.emit(&amp;#39;drawCard&amp;#39;, [1, room]);
+  }
+}&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;The math operations I used are the result of tests that best fit the canvas. Is hard to explain in detail how I come with these but the important is that we can now say what card the player wants to play or draw.&lt;/p&gt;
+&lt;h3 id=&quot;drawing-a-card&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#drawing-a-card&quot; aria-label=&quot;drawing a card permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Drawing a card&lt;/h3&gt;
+&lt;p&gt;In case they want to draw, the server will recover all the data of the room and if it is their corresponding turn will draw a card from the deck and give it to them. Then emits who is the next turn.&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;socket.on(&amp;#39;drawCard&amp;#39;, function(res) {
+	let numPlayer = data[res[1]][&amp;#39;turn&amp;#39;];
+	let idPlayer = data[res[1]][&amp;#39;players&amp;#39;][numPlayer][&amp;#39;id&amp;#39;];
+	let namePlayer = data[res[1]][&amp;#39;players&amp;#39;][&amp;#39;name&amp;#39;];
+	let handPlayer = data[res[1]][&amp;#39;players&amp;#39;][numPlayer][&amp;#39;hand&amp;#39;];
+	let deck = data[res[1]][&amp;#39;deck&amp;#39;];
+
+	if (idPlayer == socket.id) {
+		let card = parseInt(deck.shift());
+		handPlayer.push(card);
+      io.to(idPlayer).emit(&amp;#39;haveCard&amp;#39;, handPlayer);
+      //deck.push(card);
+      // TODO: Check playable card
+      //Next turn
+      numPlayer = Math.abs(numPlayer + (-1) ** data[res[1]][&amp;#39;reverse&amp;#39;]) % data[res[1]][&amp;#39;people&amp;#39;];
+      data[res[1]][&amp;#39;turn&amp;#39;] = numPlayer;
+      io.to(res[1]).emit(&amp;#39;turnPlayer&amp;#39;, data[res[1]][&amp;#39;players&amp;#39;][numPlayer][&amp;#39;id&amp;#39;]);
+    }
+  });&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;h3 id=&quot;playing-a-card&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#playing-a-card&quot; aria-label=&quot;playing a card permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Playing a card&lt;/h3&gt;
+&lt;p&gt;On the other hand, if they want to play a card from their hand, the server will check the rules to check if it is a legal move. &lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;socket.on(&amp;#39;playCard&amp;#39;, function(res) {
+    let numPlayer = data[res[1]][&amp;#39;turn&amp;#39;];
+    let idPlayer = data[res[1]][&amp;#39;players&amp;#39;][numPlayer][&amp;#39;id&amp;#39;];
+    let namePlayer = data[res[1]][&amp;#39;players&amp;#39;][&amp;#39;name&amp;#39;];
+    let handPlayer = data[res[1]][&amp;#39;players&amp;#39;][numPlayer][&amp;#39;hand&amp;#39;];
+    let deck = data[res[1]][&amp;#39;deck&amp;#39;];
+
+    if (idPlayer == socket.id) {
+      let playedColor = cardColor(res[0]);
+      let playedNumber = res[0] % 14;
+
+      let boardColor = cardColor(data[res[1]][&amp;#39;cardOnBoard&amp;#39;]);
+      let boardNumber = data[res[1]][&amp;#39;cardOnBoard&amp;#39;] % 14;
+
+      if (playedColor == &amp;#39;black&amp;#39; || playedColor == boardColor || playedNumber == boardNumber) {
+        // Play card
+        io.to(res[1]).emit(&amp;#39;sendCard&amp;#39;, res[0]);
+        data[res[1]][&amp;#39;cardOnBoard&amp;#39;] = res[0];
+        // Remove card
+        let cardPos = handPlayer.indexOf(res[0]);
+        if (cardPos &amp;gt; -1) {
+          handPlayer.splice(cardPos, 1);
+        }
+        io.to(idPlayer).emit(&amp;#39;haveCard&amp;#39;, handPlayer);
+
+        // Next turn
+        let skip = 0;
+        if (cardType(res[0]) == &amp;#39;Skip&amp;#39;) {
+          skip += 1;
+        } else if (cardType(res[0]) == &amp;#39;Reverse&amp;#39;) {
+          data[res[1]][&amp;#39;reverse&amp;#39;] = (data[res[1]][&amp;#39;reverse&amp;#39;] + 1) % 2;
+        } else if (cardType(res[0]) == &amp;#39;Draw2&amp;#39;) {
+          skip += 1;
+          //draw2
+        } else if (cardType(res[0]) == &amp;#39;Draw4&amp;#39;) {
+          skip += 1;
+          //draw4
+        }
+        numPlayer = Math.abs(numPlayer + (-1) ** data[res[1]][&amp;#39;reverse&amp;#39;] * (1 + skip)) % data[res[1]][&amp;#39;people&amp;#39;];
+        data[res[1]][&amp;#39;turn&amp;#39;] = numPlayer;
+        io.to(res[1]).emit(&amp;#39;turnPlayer&amp;#39;, data[res[1]][&amp;#39;players&amp;#39;][numPlayer][&amp;#39;id&amp;#39;]);
+
+      }
+    }
+  });&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Once done, the server emits the remaining hand and the next player’s turn.&lt;/p&gt;
+&lt;h3 id=&quot;printing-the-results&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#printing-the-results&quot; aria-label=&quot;printing the results permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Printing the results&lt;/h3&gt;
+&lt;p&gt;Whenever we need to give cards to the players, we use this function to print several cards on their hand&lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;socket.on(&amp;#39;haveCard&amp;#39;, function(nums) {
+  hand = nums;
+  ctx.clearRect(0, 400, canvas.width, canvas.height);
+  for (let i = 0; i &amp;lt; hand.length; i++) {
+    ctx.drawImage(cards, 1+cdWidth*(hand[i]%14), 1+cdHeight*Math.floor(hand[i]/14), cdWidth, cdHeight, (hand.length/112)*(cdWidth/3)+(canvas.width/(2+(hand.length-1)))*(i+1)-(cdWidth/4), 400, cdWidth/2, cdHeight/2);
+    console.log(&amp;#39;&amp;lt;&amp;lt; Have card: &amp;#39; + hand[i]);
+  }
+});&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;p&gt;Or using this other one if we want to add just one &lt;/p&gt;
+&lt;deckgo-highlight-code language=&quot;javascript&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
+          &lt;code slot=&quot;code&quot;&gt;socket.on(&amp;#39;sendCard&amp;#39;, function(num) {
+  ctx.drawImage(cards, 1+cdWidth*(num%14), 1+cdHeight*Math.floor(num/14), cdWidth, cdHeight, canvas.width/2-cdWidth/4, canvas.height/2-cdHeight/4, cdWidth/2, cdHeight/2);
+});&lt;/code&gt;
+        &lt;/deckgo-highlight-code&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;to-do-list&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#to-do-list&quot; aria-label=&quot;to do list permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;To-Do List&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; Choose colour interface.&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; What to do when someone disconnects.&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; In the endgame, saying UNO. &lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; What to do when winning or losing.&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; Draw more than one card.&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; Special cards functions.&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Creating the UNO game on JavaScript. (Part I)]]></title><description><![CDATA[In this article, I am going to explain step by step everything I came up to create the popular UNO game from scratch just in a simple canvas…]]></description><link>https://eperezcosano.github.io/uno-part1/</link><guid isPermaLink="false">https://eperezcosano.github.io/uno-part1/</guid><pubDate>Fri, 31 Jul 2020 15:52:04 GMT</pubDate><content:encoded>&lt;p&gt;In this article, I am going to explain step by step everything I came up to create the popular UNO game from scratch just in a simple canvas for the end-user that is going to play giving them a lightest client, just the browser. To do so, all code is in JavaScript. On the server-side, we manage a Node.JS server to attend all requests performed by users connected through SocketIO.&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&quot;contents&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#contents&quot; aria-label=&quot;contents permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Contents&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;#setting-up-the-server&quot;&gt;Setting up the server&lt;/a&gt;&lt;/p&gt;
-&lt;ol&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#the-web-framework&quot;&gt;The Web Framework&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#integrating-socketio&quot;&gt;Integrating Socket.IO&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;#project-structure&quot;&gt;Project Structure&lt;/a&gt;&lt;/p&gt;
-&lt;ol&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#deck-of-cards&quot;&gt;Deck of cards&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#loop-through-the-deck-of-cards&quot;&gt;Loop through the deck of cards&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -23,7 +640,7 @@
 &lt;deckgo-highlight-code   terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;$ npm init&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;&lt;strong&gt;package.json&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;:&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;json&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
           &lt;code slot=&quot;code&quot;&gt;{
   &amp;quot;name&amp;quot;: &amp;quot;socket-uno&amp;quot;,
@@ -233,8 +850,7 @@ canvas {
   display: block;
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;
-&lt;p&gt;Also, we will create a new directory for the UNO deck of cards images
-(&lt;code class=&quot;language-text&quot;&gt;/public/images/&lt;/code&gt;)&lt;/p&gt;
+&lt;p&gt;Also, we will create a new directory for the UNO deck of cards images (&lt;code class=&quot;language-text&quot;&gt;/public/images/&lt;/code&gt;).&lt;/p&gt;
 &lt;h3 id=&quot;deck-of-cards&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#deck-of-cards&quot; aria-label=&quot;deck of cards permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Deck of cards&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Full view&lt;/li&gt;
@@ -246,6 +862,7 @@ canvas {
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/eperezcosano/Uno/master/public/images/uno.svg&quot; alt=&quot;Back&quot;&gt;&lt;/p&gt;
 &lt;p&gt;And within the &lt;code class=&quot;language-text&quot;&gt;main.js&lt;/code&gt; file there is going to be coded all the game on the client-side.&lt;/p&gt;
 &lt;p&gt;By last, within the &lt;code class=&quot;language-text&quot;&gt;server.js&lt;/code&gt; file will be coded the rest of the game on the server-side.&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&quot;loop-through-the-deck-of-cards&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#loop-through-the-deck-of-cards&quot; aria-label=&quot;loop through the deck of cards permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Loop through the deck of cards&lt;/h2&gt;
 &lt;p&gt;Let’s now focus on how we are going to manage the cards display for the client-side. Since we only have one image of a full view of all the cards, we want to get one by one each by looping through the image a little chunk that will be the card in question.&lt;/p&gt;
 &lt;p&gt;Look to the &lt;a href=&quot;#deck-of-cards&quot;&gt;deck&lt;/a&gt; structure, we can extract the following patterns:&lt;/p&gt;
@@ -322,7 +939,8 @@ function cardType(num) {
   }
 }&lt;/code&gt;
         &lt;/deckgo-highlight-code&gt;</content:encoded></item><item><title><![CDATA[How to draw a hexagonal grid on HTML Canvas]]></title><description><![CDATA[In this article, we are going to learn how to get a perfect hexagon grid using JavaScript to draw on an HTML canvas. We first need to know a…]]></description><link>https://eperezcosano.github.io/hex-grid/</link><guid isPermaLink="false">https://eperezcosano.github.io/hex-grid/</guid><pubDate>Thu, 23 Jul 2020 14:27:31 GMT</pubDate><content:encoded>&lt;p&gt;In this article, we are going to learn how to get a perfect hexagon grid using JavaScript to draw on an HTML canvas. We first need to know a bit of trigonometry to solve this problem as it is necessary for all the calculations for the coordinate points composing a regular polygon.&lt;/p&gt;
-&lt;h2 id=&quot;table-of-contents&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#table-of-contents&quot; aria-label=&quot;table of contents permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Table of Contents&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;contents&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#contents&quot; aria-label=&quot;contents permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Contents&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&quot;#the-basics&quot;&gt;The Basics&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#a-hexagon&quot;&gt;A Hexagon&lt;/a&gt;&lt;/li&gt;
@@ -342,6 +960,7 @@ function cardType(num) {
 &lt;p&gt;&lt;img src=&quot;/e54179cfce3b7e01ada66b0ee7d3beb4/trigo2.svg&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Then the rest comes as a multiple of 60º as 120º, 180º, 240º, 300º and 360º which is equal to 0º again. Notice that the most-right and most-left vertex coincide with what we have expected due to sin0º = 0, cos0º = 1, cos180º = -1 and sin0º = 0. These are the resulting vertexes:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/8124cf09214dbaf0e8a7b3bacaab141b/trigo3.svg&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&quot;a-hexagon&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#a-hexagon&quot; aria-label=&quot;a hexagon permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;A Hexagon&lt;/h2&gt;
 &lt;p&gt;As this point we can start a new project to put in practice all we have seen. In an &lt;strong&gt;index.html&lt;/strong&gt; file we set the minimum required fields for a HTML canvas:&lt;/p&gt;
 &lt;deckgo-highlight-code language=&quot;html&quot;  terminal=&quot;carbon&quot; theme=&quot;one-dark&quot; line-numbers=&quot;true&quot; &gt;
@@ -388,6 +1007,7 @@ const r = 50;&lt;/code&gt;
   See the Pen &lt;a href=&apos;https://codepen.io/eperezcosano/pen/eYJXzXK&apos;&gt;An Hex&lt;/a&gt; by Ethan
   (&lt;a href=&apos;https://codepen.io/eperezcosano&apos;&gt;@eperezcosano&lt;/a&gt;) on &lt;a href=&apos;https://codepen.io&apos;&gt;CodePen&lt;/a&gt;.
 &lt;/iframe&gt;
+&lt;hr&gt;
 &lt;h2 id=&quot;a-row&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#a-row&quot; aria-label=&quot;a row permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;A Row&lt;/h2&gt;
 &lt;p&gt;Perfect! The next step is to draw a row of hexagons, like that:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/7edc8cca90ccd1442481751622ce7a78/row.svg&quot;&gt;&lt;/p&gt;
@@ -463,6 +1083,7 @@ y = y + (-1) ** j * r * Math.sin(a);&lt;/code&gt;
   See the Pen &lt;a href=&apos;https://codepen.io/eperezcosano/pen/XWXGKwP&apos;&gt;A row&lt;/a&gt; by Ethan
   (&lt;a href=&apos;https://codepen.io/eperezcosano&apos;&gt;@eperezcosano&lt;/a&gt;) on &lt;a href=&apos;https://codepen.io&apos;&gt;CodePen&lt;/a&gt;.
 &lt;/iframe&gt;
+&lt;hr&gt;
 &lt;h2 id=&quot;the-grid&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#the-grid&quot; aria-label=&quot;the grid permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;The Grid&lt;/h2&gt;
 &lt;p&gt;That is it! We are just one step away from success. All we need is to repeat the same procedure but in the row below repeatedly. But, how much lower is it from the original row? Let’s find it out:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/c92173d5dbbc6b8061598818d253339e/column.svg&quot;&gt;&lt;/p&gt;
