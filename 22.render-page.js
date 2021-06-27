@@ -1,9 +1,9 @@
 exports.ids = [22];
 exports.modules = {
 
-/***/ "./node_modules/@deckdeckgo/highlight-code/dist/esm-es5/shadow-css-b85eee6e.js":
+/***/ "./node_modules/@deckdeckgo/highlight-code/dist/esm-es5/shadow-css-c63963b5.js":
 /*!*************************************************************************************!*\
-  !*** ./node_modules/@deckdeckgo/highlight-code/dist/esm-es5/shadow-css-b85eee6e.js ***!
+  !*** ./node_modules/@deckdeckgo/highlight-code/dist/esm-es5/shadow-css-c63963b5.js ***!
   \*************************************************************************************/
 /*! exports provided: scopeCss */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -19,7 +19,7 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
     return r;
 };
 /*
- Stencil Client Platform v1.13.0 | MIT Licensed | https://stenciljs.com
+ Stencil Client Platform v1.17.3 | MIT Licensed | https://stenciljs.com
  */
 /**
  * @license
